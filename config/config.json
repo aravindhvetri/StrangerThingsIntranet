@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "stranger-things-intranet-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/strangerThingsIntranet/StrangerThingsIntranetWebPart.js",
+          "manifest": "./src/webparts/strangerThingsIntranet/StrangerThingsIntranetWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "StrangerThingsIntranetWebPartStrings": "lib/webparts/strangerThingsIntranet/loc/{locale}.js"
+  }
+}

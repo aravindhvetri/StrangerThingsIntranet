@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "stranger-things-intranet-client-side-solution",
+    "id": "9b8e9215-06a8-458c-b80d-e072043e9bc8",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "StrangerThingsIntranet description"
+      },
+      "longDescription": {
+        "default": "StrangerThingsIntranet description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "stranger-things-intranet Feature",
+        "description": "The feature that activates elements of the stranger-things-intranet solution.",
+        "id": "97d822cf-15ce-4161-a5e4-13370b3cf57b",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/stranger-things-intranet.sppkg"
+  }
+}

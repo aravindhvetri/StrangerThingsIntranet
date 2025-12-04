@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "stranger-things-intranet",
+    "libraryId": "9b8e9215-06a8-458c-b80d-e072043e9bc8",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "StrangerThingsIntranet",
+    "solutionShortDescription": "StrangerThingsIntranet description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
