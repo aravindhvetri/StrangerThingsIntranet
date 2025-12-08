@@ -1,0 +1,24 @@
+//Theme Colors:
+$color-primary: #0286c9;
+$color-secondary: #0aa5ec;
+$color-dark: #272634;
+$color-dark-lighter: #333947;
+$color-light: #eef0f2;
+$black: #000000;
+$white: #ffffff;
+
+//Using Styles For Normal CssFile:
+:root {
+  --color-primary: #0286c9;
+  --color-secondary: #0aa5ec;
+  --color-dark: #272634;
+  --color-dark-lighter: #333947;
+  --color-light: #eef0f2;
+  --white: #ffffff;
+  --black: #000000;
+  --red: #f56365;
+  --liteRed: #f5b2b2;
+  --inputBorderColor: #6b728038;
+  --color-tags: #0057b5;
+  --color-bg-tags: #7fbafa1a;
+}

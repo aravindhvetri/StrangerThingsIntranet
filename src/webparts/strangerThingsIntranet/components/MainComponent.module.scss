@@ -1,0 +1,215 @@
+@import "../../../External/commonStyles.module.scss";
+.section {
+  width: 96%;
+  margin: auto;
+  .headerSection {
+    padding: 0px 0px 0px 0px;
+    position: absolute;
+    background-color: var(--black);
+    padding-right: 10px;
+    border-bottom: 1px solid #ffffff17;
+    left: 0;
+    right: 0;
+    .headerContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .logo {
+        width: 200px;
+        z-index: 2;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .profile_header_user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 2;
+        .profile_name {
+          color: var(--white);
+          font-size: 14px;
+        }
+        .profile_Image {
+          width: 27px;
+          height: 27px;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+
+  .contentContainer {
+    position: absolute;
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+    .textSection {
+      width: 70%;
+    }
+    .imageSection {
+      width: 12%;
+      perspective: 1200px;
+      img {
+        width: 100%;
+        height: auto;
+        transform-style: preserve-3d;
+        transition: transform 0.1s ease-out;
+        will-change: transform;
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(280deg, var(--red) 0%, var(--white) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% {
+    filter: drop-shadow(0 0 0px red);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px red);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px red);
+  }
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #d1d1d1;
+  margin-bottom: 26px;
+}
+
+.glowButton {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00eaff;
+  padding: 6px 36px;
+  border-radius: 3px;
+  font-size: 15px;
+  color: var(--white);
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.7),
+    inset 0 0 10px rgba(0, 234, 255, 0.3);
+  overflow: hidden;
+}
+
+/* Glowing moving dot (left side like your sample) */
+.glowButton::before {
+  content: "";
+  position: absolute;
+  top: 51%;
+  left: 11px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: #00eaff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00eaff, 0 0 20px #00eaff;
+  animation: pulseDot 1.5s infinite ease-in-out;
+}
+
+/* Dot Thudichitu Irukura Animation */
+@keyframes pulseDot {
+  0% {
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0.6;
+  }
+}
+
+.roboContainer {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1); // normal size
+  }
+  50% {
+    transform: scale(1.09); // slightly bigger
+  }
+}
+
+.roboBall {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle at 30% 30%, #ffffff20, var(--black));
+  border-radius: 50%;
+  box-shadow: 0 0 40px #00f0ff20 inset, 0 0 40px #00f0ff10;
+  position: relative;
+  transition: transform 0.1s linear;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.eye {
+  position: absolute;
+  width: 10px;
+  height: 32px;
+  background: #a6ffff;
+  border-radius: 14px;
+  box-shadow: 0 0 12px #8ffcffcc, 0 0 24px #7fffffcc;
+  transition: transform 0.06s linear;
+}
+
+.leftEye {
+  left: 56px;
+  top: 48px;
+}
+
+.rightEye {
+  right: 56px;
+  top: 48px;
+}
+.inputRow {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  gap: 12px;
+  .inputField {
+    width: 50%;
+  }
+  input {
+    width: 100%;
+    background: transparent;
+  }
+}
+.inputRowTextarea {
+  margin-bottom: 14px;
+  textarea {
+    width: 100% !important;
+    height: 250px;
+    resize: none;
+  }
+}

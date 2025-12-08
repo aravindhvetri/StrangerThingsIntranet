@@ -1,0 +1,111 @@
+/* Font family for the entire site .....................................*/
+@font-face {
+  font-family: "interRegular";
+  src: url("../External/fonts/Inter_24pt-Regular.ttf");
+}
+* {
+  font-family: "interRegular", sans-serif;
+}
+/* Common WebPart FullWidth and CanvasZone Default Code .....................*/
+.sp-appBar {
+  display: none !important;
+}
+.commandBarWrapper {
+  display: none !important;
+}
+.CanvasToolboxHint-plusButtonWrapper {
+  display: none !important;
+}
+.headerRow-106 {
+  display: none !important;
+}
+#CommentsWrapper {
+  display: none;
+}
+.content_3f3fd3c2,
+.CanvasZone {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+.ControlZone {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+.spAppAndPropertyPanelContainer {
+  padding: 0px;
+}
+[data-automationid="SimpleFooter"] {
+  display: none !important;
+}
+*::-webkit-scrollbar {
+  height: 3px;
+  width: 3px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(192, 192, 192);
+}
+#workbenchPageContent {
+  max-width: 100%;
+  margin: 0 !important;
+}
+.p-dialog {
+  top: 10%;
+}
+
+.p-dialog-content {
+  position: relative;
+  background: url("../External//strangerThingsPopUp.jpg") center/cover no-repeat !important;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 700px;
+}
+.p-dialog-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.505);
+  pointer-events: none;
+}
+.p-dialog-content::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 40, 40, 0.25),
+    rgba(0, 0, 0, 0) 70%
+  );
+  mix-blend-mode: screen;
+  animation: softGlow 4s infinite ease-in-out;
+  pointer-events: none;
+  filter: blur(12px);
+}
+@keyframes softGlow {
+  0%,
+  100% {
+    opacity: 0.25;
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.4;
+    filter: blur(18px);
+  }
+}
+.p-dialog .p-dialog-header {
+  display: none;
+}
+.p-inputtext:enabled:focus {
+  border-color: var(--white) !important;
+  box-shadow: none !important;
+}
+.p-inputtext::placeholder {
+  font-size: 12px;
+  color: var(--white);
+}
+.p-inputtext {
+  color: var(--white);
+  font-size: 12px;
+  background: transparent;
+}
