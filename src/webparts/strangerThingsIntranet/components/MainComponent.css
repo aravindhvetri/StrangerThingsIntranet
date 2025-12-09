@@ -77,5 +77,5 @@
 }
 
 .p-button:focus {
-  box-shadow: 0 0 0 1.5px rgb(200 42 42 / 50%) !important;
+  box-shadow: 0 0 0 1.5px rgb(200 42 42 / 50%);
 }
