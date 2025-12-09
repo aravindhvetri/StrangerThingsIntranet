@@ -1,20 +1,36 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @rushstack/no-new-null */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import "./MainComponent.css";
 import "../../../External/style.css";
 import styles from "./MainComponent.module.scss";
 import { IUserDetails } from "../../../CommonServices/interface";
 import { Button } from "primereact/button";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import SPServices from "../../../CommonServices/SPServices";
+import { Config } from "../../../CommonServices/Config";
+import { Toast } from "primereact/toast";
+import { toastNotify } from "../../../CommonServices/CommonTemplates";
 
 const MainComponent = (props: any) => {
   const absoluteURL = props?.context?._pageContext?._web?.absoluteUrl;
   const leftEyeRef: any = useRef(null);
   const rightEyeRef: any = useRef(null);
   const ballRef: any = useRef(null);
-  const [visible, setVisible] = React.useState(false);
+  const toast = useRef<Toast>(null);
+  const [visible, setVisible] = useState(false);
+  const [formData, setFormData] = useState<any>({});
 
   const userDetails: IUserDetails = {
     name: props?.context._pageContext._user.displayName,
@@ -30,9 +46,73 @@ const MainComponent = (props: any) => {
   const playSound = () => {
     clickSound.currentTime = 0;
     void clickSound.play();
-    setVisible(true);
   };
 
+  //handle form data change
+  const handleOnChange = (field: string, value: string) => {
+    setFormData((prevData: any) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  //generate json on submit
+  const generateJson = () => {
+    if (!formData?.Email?.trim() || !formData?.FeedBack?.trim()) {
+      showErrorToast();
+      return;
+    }
+
+    const jsonData = {
+      Name: formData?.Name ?? "",
+      Email: formData?.Email ?? "",
+      FeedBack: formData?.FeedBack ?? "",
+    };
+
+    void handleAdd(jsonData);
+  };
+
+  //show error toast
+  const showErrorToast = () => {
+    toast.current?.show({
+      severity: "warn",
+      summary: "Error",
+      content: (props) =>
+        toastNotify({
+          iconName: "pi-exclamation-triangle",
+          ClsName: "toast-imgcontainer-warning",
+          type: "Alert",
+          msg: "Email and Feed back is required fields!",
+          image: require("../../../External/errorImage.png"),
+        }),
+      life: 3000,
+    });
+  };
+
+  //add item to list
+  const handleAdd = (jsonData: any) => {
+    SPServices.SPAddItem({
+      Listname: Config.ListNames.FeedBack,
+      RequestJSON: jsonData,
+    })
+      .then((res) => {
+        //reset form data
+        setFormData({
+          Name: "",
+          Email: "",
+          FeedBack: "",
+        });
+        setVisible(false);
+      })
+      .catch((err) => {
+        console.log(
+          err,
+          "Add Datas to FeedBack err in MainComponent.tsx component"
+        );
+      });
+  };
+
+  //initial render eye movement setup
   useEffect(() => {
     const ball = ballRef.current;
     const left = leftEyeRef.current;
@@ -96,6 +176,7 @@ const MainComponent = (props: any) => {
 
   return (
     <div className="hero-container">
+      <Toast ref={toast} position="top-right" className="stranger-toast" />
       <div className="bg-layer">
         <img
           src={require("../../../External/tenor.gif")}
@@ -147,6 +228,7 @@ const MainComponent = (props: any) => {
               className={styles.glowButton}
               onClick={() => {
                 playSound();
+                setVisible(true);
               }}
             />
           </div>
@@ -170,21 +252,30 @@ const MainComponent = (props: any) => {
         header="Send Feedback"
         visible={visible}
         onHide={() => setVisible(false)}
-        // className={styles.strangerDialog}
         dismissableMask
         modal
       >
         <div>
           <div className={styles.inputRow}>
             <div className={styles.inputField}>
-              <InputText placeholder="Your Name" />
+              <InputText
+                value={formData?.Name}
+                onChange={(e) => handleOnChange("Name", e.target.value)}
+                placeholder="Your Name"
+              />
             </div>
             <div className={styles.inputField}>
-              <InputText placeholder="Your Email" />
+              <InputText
+                value={formData?.Email}
+                onChange={(e) => handleOnChange("Email", e.target.value)}
+                placeholder="Your Email"
+              />
             </div>
           </div>
           <div className={styles.inputRowTextarea}>
             <InputTextarea
+              value={formData?.FeedBack}
+              onChange={(e) => handleOnChange("FeedBack", e.target.value)}
               maxLength={500}
               placeholder="Your Feedback"
               rows={5}
@@ -194,7 +285,10 @@ const MainComponent = (props: any) => {
             <Button
               label="Submit"
               className="strangerBtn"
-              onClick={() => setVisible(false)}
+              onClick={() => {
+                playSound();
+                generateJson();
+              }}
             />
           </div>
         </div>

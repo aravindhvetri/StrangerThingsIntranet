@@ -109,3 +109,133 @@
   font-size: 12px;
   background: transparent;
 }
+
+/* Toast Common Styles: .............................................*/
+.toastContainer {
+  display: flex;
+  flex: 1;
+  gap: 14px;
+  align-items: center;
+}
+.toastContainer i {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+}
+.toast-Heading {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.toast-message {
+  font-size: 13px;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 16px;
+  gap: 6px;
+}
+
+.p-toast .p-toast-message .p-toast-icon-close {
+  width: 14px;
+  height: 14px;
+  color: var(--white);
+}
+.toast-imgcontainer-success {
+  padding: 10px;
+  background-color: #165424f7;
+  border-radius: 6px;
+}
+.toast-imgcontainer-warning {
+  padding: 3px;
+}
+.toast-imgcontainer-warning img {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.p-toast .p-toast-message .p-toast-icon-close:hover {
+  background-color: transparent !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-warn {
+  background: #fa4f4f;
+  border: none;
+  color: var(--white);
+}
+/* Animate toast content */
+.p-toast-message-content {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add the animated bottom line */
+/* .p-toast-message-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background: var(--white);
+  animation: slideLine 3s linear;
+} */
+
+/* Smooth sliding animation */
+/* @keyframes slideLine {
+  0% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+} */
+
+/* Fire animated bottom line */
+.p-toast-message-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff4500,
+    #ffae00,
+    #ff4500,
+    #ff0000
+  );
+  filter: blur(2px);
+  animation: fireMove 3s linear infinite, fireGlow 0.18s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+/* Fire movement */
+@keyframes fireMove {
+  0% {
+    background-position: 0% 0;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    background-position: 300% 0;
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Flickering fire glow */
+@keyframes fireGlow {
+  0% {
+    box-shadow: 0 0 10px #ff2d2d, 0 0 20px #ff6600;
+  }
+  50% {
+    box-shadow: 0 0 14px #ff6d00, 0 0 28px #ff3b00;
+  }
+  100% {
+    box-shadow: 0 0 10px #ff2d2d, 0 0 20px #ff6600;
+  }
+}
