@@ -4,5 +4,6 @@ import { IListNames } from "./interface";
 export namespace Config {
   export const ListNames: IListNames = {
     FeedBack: "FeedBack",
+    StrangerThingsMasterList: "StrangerThingsMasterList",
   };
 }
