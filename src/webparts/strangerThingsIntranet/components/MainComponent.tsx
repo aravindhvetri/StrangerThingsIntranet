@@ -22,7 +22,9 @@ import SPServices from "../../../CommonServices/SPServices";
 import { Config } from "../../../CommonServices/Config";
 import { Toast } from "primereact/toast";
 import { toastNotify } from "../../../CommonServices/CommonTemplates";
-import Announcement from "./Announcement/Announcement";
+import QuickLinks from "./QuickLinks/QuickLinks";
+import TopProjects from "./TopProjects/TopProjects";
+import AllNews from "./AllNews/AllNews";
 
 const MainComponent = (props: any) => {
   const absoluteURL = props?.context?._pageContext?._web?.absoluteUrl;
@@ -35,7 +37,15 @@ const MainComponent = (props: any) => {
   const [strangerThingsMasterData, setStrangerThingsMasterData] = useState<any>(
     []
   );
-  console.log(strangerThingsMasterData, "strangerThingsMasterData");
+  const tabs = [
+    "All news",
+    "All projects",
+    "New joiners",
+    "All members",
+    "Fun activities",
+  ];
+
+  const [activeTab, setActiveTab] = useState("All news");
 
   const userDetails: IUserDetails = {
     name: props?.context._pageContext._user.displayName,
@@ -116,6 +126,37 @@ const MainComponent = (props: any) => {
           "Add Datas to FeedBack err in MainComponent.tsx component"
         );
       });
+  };
+
+  //Render components:
+  const renderContent = () => {
+    switch (activeTab) {
+      case "All news":
+        return (
+          <div className={styles.newsContainers}>
+            <AllNews />
+          </div>
+        );
+
+      case "All projects":
+        return (
+          <div className={styles.newsContainers}>
+            <TopProjects />
+          </div>
+        );
+
+      case "New joiners":
+        return <div className={styles.newsContainers}>New joiners list</div>;
+
+      case "All members":
+        return <div className={styles.newsContainers}>Members list</div>;
+
+      case "Fun activities":
+        return <div className={styles.newsContainers}>Fun activities list</div>;
+
+      default:
+        return null;
+    }
   };
 
   //initial render eye movement setup
@@ -212,15 +253,6 @@ const MainComponent = (props: any) => {
     <>
       <div className="hero-container">
         <Toast ref={toast} position="top-right" className="stranger-toast" />
-        <div className="bg-layer">
-          <img
-            src={require("../../../External/tenor.gif")}
-            className="bg-gif"
-            alt="background"
-          />
-        </div>
-
-        {/* Audio */}
         {/* <audio autoPlay loop>
           <source
             src={`${absoluteURL}/SiteAssets/strangerthings_remix.mp3`}
@@ -332,8 +364,28 @@ const MainComponent = (props: any) => {
               </div>
             </div>
           </div>
+          <QuickLinks />
+          <div className={styles.Layout}>
+            <div className={styles.buttonsContainer}>
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  className={`${styles.tabButton} ${
+                    activeTab === tab ? styles.activeTab : ""
+                  }`}
+                  onClick={() => {
+                    playSound();
+                    setActiveTab(tab);
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <div className={styles.tabContent}>{renderContent()}</div>
+          </div>
         </div>
-        <Announcement />
       </div>
       {/* Stranger Things Popup */}
       <Dialog
