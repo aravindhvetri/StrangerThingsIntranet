@@ -5,5 +5,6 @@ export namespace Config {
   export const ListNames: IListNames = {
     FeedBack: "FeedBack",
     StrangerThingsMasterList: "StrangerThingsMasterList",
+    QuickLinks: "QuickLinks",
   };
 }

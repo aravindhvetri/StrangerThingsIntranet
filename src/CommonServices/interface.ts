@@ -8,6 +8,7 @@ export interface IUserDetails {
 export interface IListNames {
   FeedBack: string;
   StrangerThingsMasterList: string;
+  QuickLinks: string;
 }
 
 //Toaster Interface
