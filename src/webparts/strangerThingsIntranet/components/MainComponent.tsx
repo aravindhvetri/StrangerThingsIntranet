@@ -25,9 +25,17 @@ import { toastNotify } from "../../../CommonServices/CommonTemplates";
 import QuickLinks from "./QuickLinks/QuickLinks";
 import TopProjects from "./TopProjects/TopProjects";
 import AllNews from "./AllNews/AllNews";
+import PartyMembers from "./PartyMembers/PartyMembers";
+import Documents from "./Documents/Documents";
+import NewJoiners from "./NewJoiners/NewJoiners";
+import Calendar from "./Calendar/Calendar";
+import Leaves from "./LeavesAndEvents/Leaves";
+import PrayerTimings from "./PrayerTimings/PrayerTimings";
+import ThreeD from "./ThreeD/ThreeD";
 
 const MainComponent = (props: any) => {
   const absoluteURL = props?.context?._pageContext?._web?.absoluteUrl;
+  console.log(absoluteURL, "absoluteURL");
   const leftEyeRef: any = useRef(null);
   const rightEyeRef: any = useRef(null);
   const ballRef: any = useRef(null);
@@ -39,10 +47,10 @@ const MainComponent = (props: any) => {
   );
   const tabs = [
     "All news",
-    "All projects",
-    "New joiners",
-    "All members",
-    "Fun activities",
+    "Marketings",
+    "Top organizers",
+    // "All members",
+    // "Fun activities",
   ];
 
   const [activeTab, setActiveTab] = useState("All news");
@@ -138,21 +146,25 @@ const MainComponent = (props: any) => {
           </div>
         );
 
-      case "All projects":
+      case "Marketings":
         return (
           <div className={styles.newsContainers}>
             <TopProjects />
           </div>
         );
 
-      case "New joiners":
-        return <div className={styles.newsContainers}>New joiners list</div>;
+      case "Top organizers":
+        return (
+          <div className={styles.newsContainers}>
+            <NewJoiners />
+          </div>
+        );
 
-      case "All members":
-        return <div className={styles.newsContainers}>Members list</div>;
+      // case "All members":
+      //   return <div className={styles.newsContainers}>Members list</div>;
 
-      case "Fun activities":
-        return <div className={styles.newsContainers}>Fun activities list</div>;
+      // case "Fun activities":
+      //   return <div className={styles.newsContainers}>Fun activities list</div>;
 
       default:
         return null;
@@ -283,7 +295,7 @@ const MainComponent = (props: any) => {
                   </li>
                   <li>Careers</li>
                   <li>
-                    Compnay & News <span className={styles.arrow}></span>
+                    Company & News <span className={styles.arrow}></span>
                   </li>
                   <li>Workspaces & Teams</li>
                 </ul>
@@ -365,6 +377,28 @@ const MainComponent = (props: any) => {
             </div>
           </div>
           <QuickLinks />
+          <div className={styles.partyMembersAndDocumentsSection}>
+            <div className={styles.PartyMembersContainer}>
+              <PartyMembers />
+            </div>
+            <div className={styles.DocumentContainer}>
+              <Documents />
+            </div>
+          </div>
+          <div className={styles.calendarSection}>
+            <div className={styles.tilesContainer}>
+              <PrayerTimings />
+            </div>
+            <div className={styles.calendarContainer}>
+              <Calendar />
+            </div>
+            <div className={styles.shoutOuts}>
+              <Leaves />
+            </div>
+          </div>
+          <div className={styles.threeDContainer}>
+            <ThreeD />
+          </div>
           <div className={styles.Layout}>
             <div className={styles.buttonsContainer}>
               {tabs.map((tab) => (

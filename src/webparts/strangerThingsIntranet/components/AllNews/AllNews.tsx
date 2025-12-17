@@ -44,7 +44,8 @@ const AllNews = () => {
     {
       author: "Sarah Wilson",
       date: "August 12 2024",
-      title: "How Our Team is Transforming Collaboration",
+      title:
+        "How Our Team is Transforming Collaboration and web based collaboration",
       comments: 1,
       likes: 3,
       image:
