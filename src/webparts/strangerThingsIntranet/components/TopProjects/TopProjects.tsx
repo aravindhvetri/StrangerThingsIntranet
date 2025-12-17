@@ -10,62 +10,119 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import styles from "./TopProject.module.scss";
+import { Chart } from "react-google-charts";
 import "../../../../External/style.css";
 
 const TopProjects = () => {
-  const sampleProjects = [
+  const salesData = [
+    ["Month", "Sales"],
+    ["January", 150],
+    ["February", 200],
+    ["March", 300],
+    ["April", 500],
+    ["May", 180],
+    ["June", 280],
+  ];
+
+  const browserData = [
+    ["Browser", "Users"],
+    ["Chrome", 65],
+    ["Firefox", 60],
+    ["Safari", 80],
+    ["Edge", 78],
+    ["Opera", 50],
+  ];
+
+  const chartOptions = {
+    curveType: "function",
+    legend: { position: "bottom", textStyle: { color: "#ffffff" } },
+    colors: ["#4e73df"],
+    animation: {
+      startup: true,
+      duration: 1500,
+    },
+    backgroundColor: "transparent",
+    hAxis: {
+      textStyle: { color: "#ffffff" },
+    },
+    vAxis: {
+      textStyle: { color: "#ffffff" },
+    },
+    titleTextStyle: {
+      color: "#ffffff",
+    },
+  };
+
+  const barOptions = {
+    legend: { position: "none", textStyle: { color: "#ffffff" } },
+    colors: ["#4e73df", "#1cc88a", "#f6c23e", "#e74a3b", "#8e44ad"],
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: "out",
+    },
+    backgroundColor: "transparent",
+    hAxis: {
+      textStyle: { color: "#ffffff" },
+    },
+    vAxis: {
+      textStyle: { color: "#ffffff" },
+    },
+    titleTextStyle: {
+      color: "#ffffff",
+    },
+  };
+
+  const topCard = [
     {
-      title: "AI Model Upgrade",
-      desc: "New LLM pipeline integrated successfully",
-      date: "Dec 5, 2025",
-      icon: "https://cdn-icons-png.flaticon.com/512/9435/9435355.png",
-      color: "#ff2d55",
+      title: "Total Sales",
+      count: "1,234",
     },
     {
-      title: "Frontend Revamp",
-      desc: "Dashboard UI/UX updated",
-      date: "Dec 4, 2025",
-      icon: "https://cdn-icons-png.flaticon.com/512/9435/9435355.png",
-      color: "#00eaff",
+      title: "New Users",
+      count: "200",
     },
     {
-      title: "Backend Optimization",
-      desc: "Server performance improved by 40%",
-      date: "Dec 1, 2025",
-      icon: "https://cdn-icons-png.flaticon.com/512/9435/9435355.png",
-      color: "#ffb300",
+      title: "Active Sessions",
+      count: "89",
     },
   ];
   return (
-    <div className={styles.TopProjectSection}>
-      <h2 className="heading">Top Projects</h2>
-
-      <div className={styles.TopProjectContainer}>
-        {sampleProjects.map((proj, index) => (
-          <div key={index} className={styles.TopProjectBox}>
-            <div className={styles.leftTimeline}>
-              <span
-                className={styles.timelineDot}
-                style={{ boxShadow: `0 0 15px ${proj.color}` }}
-              >
-                <img src={proj.icon} alt="" />
-              </span>
-              <div className={styles.timelineLine}></div>
-            </div>
-
-            <div className={styles.contentBox}>
-              <div className={styles.projectTitle}>{proj.title}</div>
-              <div className={styles.projectDesc}>{proj.desc}</div>
-            </div>
-
-            <div className={styles.projectDate}>
-              <div className={styles.calendarIcon}>
-                <img src={require("../../../../External/calendar.png")}></img>
-              </div>
-              <div>{proj.date}</div>
-            </div>
+    <div className={styles.topProjectsContainer}>
+      <h2 className="heading" style={{ marginBottom: "0" }}>
+        Latest status
+      </h2>
+      {/* Cards */}
+      <div className={styles.cards}>
+        {topCard.map((items, index) => (
+          <div key={index} className={styles.card}>
+            <h4>{items?.title}</h4>
+            <p>{items?.count}</p>
+            <span className={styles.ribbon}>TRUCS</span>
           </div>
         ))}
+      </div>
+
+      {/* Charts */}
+      <div className={styles.charts}>
+        <div className={`${styles.chart} chart`}>
+          <Chart
+            chartType="LineChart"
+            width="100%"
+            height="300px"
+            data={salesData}
+            options={chartOptions}
+          />
+        </div>
+        <div className={`${styles.chart} chart`}>
+          <Chart
+            chartType="BarChart"
+            width="100%"
+            height="300px"
+            data={browserData}
+            options={barOptions}
+          />
+        </div>
       </div>
     </div>
   );

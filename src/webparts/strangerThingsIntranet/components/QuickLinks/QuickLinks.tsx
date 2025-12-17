@@ -16,7 +16,6 @@ import { Config } from "../../../../CommonServices/Config";
 
 const QuickLinks = () => {
   const [quickLinkData, setQuickLinkData] = useState<any>([]);
-  console.log(quickLinkData, "quickLinkData");
 
   //Initial render:
   useEffect(() => {

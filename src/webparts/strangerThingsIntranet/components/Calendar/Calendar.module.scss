@@ -1,0 +1,122 @@
+.calendarWrapper {
+  padding: 0;
+}
+
+.eventsSection {
+  margin-top: 21px;
+}
+
+.noEvents {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+  padding-top: 12px;
+}
+
+.eventCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f9fafb36;
+  border-left: 2px solid #ff8403;
+  animation: floatCard 2.2s ease-in-out infinite;
+}
+@keyframes floatCard {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.dateBox {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  background: #ff112d;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  small {
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+}
+
+.eventInfo {
+  flex: 1;
+
+  h4 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--white);
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: #d3b3b3;
+  }
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #ff112d5e;
+  color: var(--white);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.hasEvent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hasEvent::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: firePulse 1.4s ease-in-out infinite;
+}
+
+@keyframes firePulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+}

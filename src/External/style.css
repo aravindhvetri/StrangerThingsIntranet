@@ -22,6 +22,9 @@
 #CommentsWrapper {
   display: none;
 }
+#SuiteNavWrapper {
+  display: none !important;
+}
 .content_3f3fd3c2,
 .CanvasZone {
   padding: 0 !important;
@@ -37,9 +40,12 @@
 [data-automationid="SimpleFooter"] {
   display: none !important;
 }
+[data-automationid="SiteHeader"] {
+  display: none !important;
+}
 *::-webkit-scrollbar {
-  height: 3px;
-  width: 3px;
+  height: 2px;
+  width: 2px;
 }
 *::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -211,4 +217,82 @@
 
 .p-carousel-prev {
   display: none !important;
+}
+
+.card {
+  cursor: pointer;
+  background: linear-gradient(rgba(0, 0, 0, 0.921), rgba(0, 0, 0, 0.099)),
+    url("../External/strangerThingsPopUp.jpg") center/cover no-repeat !important;
+}
+.p-calendar {
+  width: 100%;
+}
+.chart {
+  background: linear-gradient(rgba(0, 0, 0, 0.842), rgba(0, 0, 0, 0.859)),
+    url("../External/graph.jpg") center/cover no-repeat !important;
+}
+.p-datepicker table td > span.p-highlight {
+  background: #007bff69;
+}
+.p-datepicker-calendar {
+  font-size: 12px;
+}
+.p-datepicker table td > span {
+  width: 30px;
+  height: 30px;
+}
+.p-datepicker .p-datepicker-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.921), rgba(0, 0, 0, 0.511)),
+    url("../External/strangerThingsPopUp.jpg") center/cover no-repeat !important;
+
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+  color: var(--white);
+  border-bottom: none;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  font-weight: 100 !important;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
+  font-weight: 100 !important;
+}
+.p-datepicker {
+  background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.05)
+    ),
+    rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  color: var(--white);
+  border: none !important;
+}
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover {
+  background: #e9ecefbd;
+  color: var(--black);
+}
+
+.AwardsNameContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.474), rgba(0, 0, 0, 0.441)),
+    url("../External/graph.jpg") center/cover no-repeat !important;
+}
+
+.starcourtMall {
+  background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(0, 0, 0, 0.582)),
+    url("../External/starCourtMall.jpg") center/cover no-repeat !important;
+  padding: 10px 14px 10px 14px;
+  border-radius: 6px;
+}
+
+.panoroma {
+  width: 100%;
+  height: 100%;
+  background: url("../External/roomRainbow.png") center/cover no-repeat;
+  transition: transform 0.15s ease-out;
+  cursor: grab;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
 }

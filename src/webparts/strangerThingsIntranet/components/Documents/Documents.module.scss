@@ -1,0 +1,120 @@
+@import "../../../../External/commonStyles.module.scss";
+.DocumentsContainer {
+  padding: 0;
+}
+.heading {
+  border-left: 6px solid transparent;
+  position: relative;
+  padding-left: 20px;
+  /* Fire border */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(
+      180deg,
+      #ffea00,
+      #ffb300,
+      #ff6a00,
+      #ff2e00,
+      #ff6a00,
+      #ffb300,
+      #ffea00
+    );
+    background-size: 100% 300%;
+    animation: fireBorder 3s ease-in-out infinite;
+  }
+}
+@keyframes fireBorder {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.DocumentSection {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 380px;
+  overflow: auto;
+  padding-right: 8px;
+
+  .DocumentCard {
+    width: 100%;
+    padding: 9px 11px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.07);
+    margin-bottom: 12px;
+    backdrop-filter: blur(6px);
+    position: relative;
+    transition: 0.25s ease;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(4px) scale(1.01);
+    }
+
+    .ImageContainer {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        transition: 0.3s ease;
+      }
+
+      // Image zoom on hover
+      .DocumentCard:hover & img {
+        transform: scale(1.15);
+      }
+    }
+
+    .documentName {
+      font-size: 13px;
+      color: var(--white);
+      position: relative;
+      transition: 0.3s;
+      // FIRE underline animation
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, #ff0000, #ffae00, #ffd000);
+        box-shadow: 0 0 8px #ff3d00;
+        border-radius: 10px;
+        transition: width 0.4s ease;
+      }
+    }
+    &:hover .documentName {
+      text-shadow: 0 0 6px #ff3d00, 0 0 12px #ffae00;
+    }
+
+    &:hover .documentName::after {
+      width: 100%;
+    }
+  }
+}

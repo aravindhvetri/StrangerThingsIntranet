@@ -461,7 +461,7 @@
 .Layout {
   width: 85%;
   margin: auto;
-  padding-top: 40px;
+  padding-top: 24px;
 }
 
 .buttonsContainer {
@@ -570,4 +570,40 @@
 .newsContainers {
   padding-top: 10px;
   transition: 0.3s ease;
+}
+
+.partyMembersAndDocumentsSection {
+  padding-top: 50px;
+  display: flex;
+  width: 86%;
+  gap: 50px;
+  margin: auto;
+  .PartyMembersContainer {
+    width: 78%;
+  }
+  .DocumentContainer {
+    width: 20%;
+  }
+}
+
+.calendarSection {
+  padding-top: 40px;
+  display: flex;
+  width: 86%;
+  gap: 50px;
+  margin: auto;
+  .tilesContainer {
+    width: 33%;
+  }
+  .calendarContainer {
+    width: 33%;
+  }
+  .shoutOuts {
+    width: 33%;
+  }
+}
+
+.threeDContainer {
+  width: 86%;
+  margin: auto;
 }
