@@ -12,8 +12,10 @@ import * as React from "react";
 import styles from "./AllNews.module.scss";
 import { Carousel } from "primereact/carousel";
 import "../../../../External/style.css";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const AllNews = () => {
+const AllNews = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const newsData = [
     {
       author: "Sabina Saetgareeva",
@@ -56,12 +58,25 @@ const AllNews = () => {
   // Card Template for PrimeReact
   const cardTemplate = (item: any) => {
     return (
-      <div className={styles.NewsCard}>
+      <div
+        style={
+          strangerToggle
+            ? {
+                background:
+                  "linear-gradient(var(--white), rgba(0, 0, 0, 0.418))",
+              }
+            : {}
+        }
+        className={styles.NewsCard}
+      >
         <div className={styles.ImageBox}>
           <img src={item.image} alt={item.title} />
         </div>
 
-        <div className={styles.AuthorRow}>
+        <div
+          style={strangerToggle ? { color: "white" } : {}}
+          className={styles.AuthorRow}
+        >
           {item.author}, {item.date}
         </div>
 
@@ -76,15 +91,20 @@ const AllNews = () => {
   };
 
   return (
-    <div className={styles.AllNewsSection}>
-      <h2 className="heading">All news</h2>
+    <div
+      ref={ref}
+      className={`${styles.AllNewsSection} fadeUp ${visible ? "visible" : ""}`}
+    >
+      <h2 className={strangerToggle ? "normalWorlHeading" : "heading"}>
+        All news
+      </h2>
       <Carousel
         value={newsData}
         itemTemplate={cardTemplate}
-        numVisible={3} // show 3 cards
-        numScroll={1} // move one card at a time
+        numVisible={3}
+        numScroll={1}
         circular
-        autoplayInterval={4000}
+        // autoplayInterval={4000}
         showNavigators={true}
         showIndicators={true}
         className={styles.NewsCarousel}

@@ -1,5 +1,7 @@
 import * as React from "react";
 import { IToaster } from "./interface";
+import { useEffect, useState, useRef } from "react";
+import "../External/style.css";
 
 //Common Toast Notification setups:
 export const toastNotify = (item: IToaster) => {
@@ -26,4 +28,27 @@ export const toastNotify = (item: IToaster) => {
       </div>
     </div>
   );
+};
+
+export const useScrollReveal = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 } // 20% visible then trigger
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, visible };
 };

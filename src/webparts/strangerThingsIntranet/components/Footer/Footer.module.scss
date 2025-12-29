@@ -1,0 +1,85 @@
+@import "../../../../External/commonStyles.module.scss";
+.section {
+  position: relative;
+  background: var(--black);
+  margin-top: 20px;
+  overflow: hidden;
+
+  .container {
+    position: relative;
+    z-index: 3;
+    padding: 34px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  /* 🌠 Star rain layers */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 240%;
+    pointer-events: none;
+    background-repeat: repeat;
+    animation-timing-function: linear;
+  }
+
+  /* ✨ Small fast stars */
+  &::before {
+    background-image: radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 30% 60%, #fff, transparent),
+      radial-gradient(2px 2px at 70% 40%, #fff, transparent),
+      radial-gradient(1px 1px at 90% 80%, #fff, transparent);
+    background-size: 160px 160px;
+    animation: starFallFast 9s linear infinite,
+      starTwinkle 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+  }
+
+  /* ✨ Bigger glowing stars (slightly slow) */
+  &::after {
+    background-image: radial-gradient(3px 3px at 20% 10%, #fff, transparent),
+      radial-gradient(2.5px 2.5px at 50% 70%, #fff, transparent),
+      radial-gradient(3px 3px at 80% 30%, #fff, transparent);
+    background-size: 260px 260px;
+    animation: starFallSlow 14s linear infinite,
+      starTwinkle 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 1));
+  }
+}
+
+@keyframes starFallFast {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(55%);
+  }
+}
+
+@keyframes starFallSlow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(45%);
+  }
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}

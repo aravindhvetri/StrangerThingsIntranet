@@ -21,7 +21,10 @@ import { InputTextarea } from "primereact/inputtextarea";
 import SPServices from "../../../CommonServices/SPServices";
 import { Config } from "../../../CommonServices/Config";
 import { Toast } from "primereact/toast";
-import { toastNotify } from "../../../CommonServices/CommonTemplates";
+import {
+  toastNotify,
+  useScrollReveal,
+} from "../../../CommonServices/CommonTemplates";
 import QuickLinks from "./QuickLinks/QuickLinks";
 import TopProjects from "./TopProjects/TopProjects";
 import AllNews from "./AllNews/AllNews";
@@ -32,34 +35,32 @@ import Calendar from "./Calendar/Calendar";
 import Leaves from "./LeavesAndEvents/Leaves";
 import PrayerTimings from "./PrayerTimings/PrayerTimings";
 import ThreeD from "./ThreeD/ThreeD";
+import Footer from "./Footer/Footer";
+import { InputSwitch } from "primereact/inputswitch";
 
 const MainComponent = (props: any) => {
+  const { ref, visible } = useScrollReveal();
+  const [videoVisible, setVideoVisible] = useState(false);
+  const view = require("../../../External/view.png");
+  const mall = require("../../../External/shopping-center.png");
   const absoluteURL = props?.context?._pageContext?._web?.absoluteUrl;
-  console.log(absoluteURL, "absoluteURL");
   const leftEyeRef: any = useRef(null);
   const rightEyeRef: any = useRef(null);
   const ballRef: any = useRef(null);
   const toast = useRef<Toast>(null);
-  const [visible, setVisible] = useState(false);
+  const [visibles, setVisible] = useState(false);
+  const [strangerToggle, setStrangerToggle] = useState<boolean>(false);
+  const [threeDVisible, setThreeDVisible] = useState(false);
   const [formData, setFormData] = useState<any>({});
   const [strangerThingsMasterData, setStrangerThingsMasterData] = useState<any>(
     []
   );
-  const tabs = [
-    "All news",
-    "Marketings",
-    "Top organizers",
-    // "All members",
-    // "Fun activities",
-  ];
-
+  const tabs = ["All news", "Marketings", "Top organizers"];
   const [activeTab, setActiveTab] = useState("All news");
-
   const userDetails: IUserDetails = {
     name: props?.context._pageContext._user.displayName,
     email: props?.context._pageContext._user.email,
   };
-  console.log(userDetails, "userDetails in MainComponent.tsx");
 
   // Preload audio once
   const clickSound = new Audio(`${absoluteURL}/SiteAssets/clickSound.mp3`);
@@ -88,7 +89,7 @@ const MainComponent = (props: any) => {
     }
 
     const jsonData = {
-      Name: formData?.Name ?? "",
+      Title: formData?.Name ?? "",
       Email: formData?.Email ?? "",
       FeedBack: formData?.FeedBack ?? "",
     };
@@ -142,29 +143,23 @@ const MainComponent = (props: any) => {
       case "All news":
         return (
           <div className={styles.newsContainers}>
-            <AllNews />
+            <AllNews strangerToggle={strangerToggle} />
           </div>
         );
 
       case "Marketings":
         return (
           <div className={styles.newsContainers}>
-            <TopProjects />
+            <TopProjects strangerToggle={strangerToggle} />
           </div>
         );
 
       case "Top organizers":
         return (
           <div className={styles.newsContainers}>
-            <NewJoiners />
+            <NewJoiners strangerToggle={strangerToggle} />
           </div>
         );
-
-      // case "All members":
-      //   return <div className={styles.newsContainers}>Members list</div>;
-
-      // case "Fun activities":
-      //   return <div className={styles.newsContainers}>Fun activities list</div>;
 
       default:
         return null;
@@ -243,7 +238,6 @@ const MainComponent = (props: any) => {
       Orderbydecorasc: true,
     })
       .then((res: any) => {
-        console.log(res, "res in getStrangerThingsMasterDatas");
         let strangerThingsMasterData: any = [];
         res?.forEach((items: any) => {
           strangerThingsMasterData.push({
@@ -263,7 +257,7 @@ const MainComponent = (props: any) => {
 
   return (
     <>
-      <div className="hero-container">
+      <div className={strangerToggle ? "normal-world" : "hero-container"}>
         <Toast ref={toast} position="top-right" className="stranger-toast" />
         {/* <audio autoPlay loop>
           <source
@@ -272,11 +266,15 @@ const MainComponent = (props: any) => {
           />
         </audio> */}
         <div className={styles.section}>
-          <div className={`${styles.headerSection} headerSection`}>
+          <div
+            className={`${styles.headerSection} headerSection ${
+              strangerToggle ? "headerSectionNormalWorld" : ""
+            }`}
+          >
             <div className={`${styles.headerContainer}`}>
               <div className={styles.logo}>
                 <img
-                  src={require("../../../External/logo.png")}
+                  src={require("../../../External/fireLogoRemovebg.png")}
                   alt="no image"
                 ></img>
               </div>
@@ -293,21 +291,67 @@ const MainComponent = (props: any) => {
                   <li>
                     Blog <span className={styles.arrow}></span>
                   </li>
-                  <li>Careers</li>
+
                   <li>
                     Company & News <span className={styles.arrow}></span>
                   </li>
-                  <li>Workspaces & Teams</li>
                 </ul>
+              </div>
+              <div
+                style={{ display: "flex", gap: "12px", marginRight: "24px" }}
+              >
+                <div className="inputToggleSwitch">
+                  <InputSwitch
+                    checked={strangerToggle}
+                    title="change the world"
+                    onChange={(e) => {
+                      setStrangerToggle(e.value);
+                      playSound();
+                    }}
+                  />
+                </div>
+                <div className={styles.profile_Image}>
+                  <img
+                    src={`/_layouts/15/userphoto.aspx?size=L&username=${userDetails?.email}`}
+                    alt="User profile photo"
+                  ></img>
+                </div>
               </div>
             </div>
           </div>
-          <div className={`${styles.contentContainer} contentContainer`}>
+          <div
+            className={`${styles.contentContainer} ${
+              strangerToggle
+                ? "contentContainerNormalWorld"
+                : "contentContainer"
+            }`}
+          >
             <div className={styles.welcomeContainer}>
-              <h1 className={styles.title}>Welcome, {userDetails?.name}!</h1>
+              <h1
+                className={
+                  strangerToggle ? styles.titleNormalWorld : styles.title
+                }
+              >
+                Welcome, {userDetails?.name}!
+              </h1>
+              <div
+                title="This is a 360-degree view that contains everything from Stranger Things. You can click once and look around."
+                className={styles.viewImageContainer}
+                onClick={() => {
+                  playSound();
+                  setThreeDVisible(true);
+                }}
+              >
+                <img src={strangerToggle ? mall : view}></img>
+              </div>
             </div>
             <div className={styles.roboContainer}>
-              <div className={styles.roboBall} ref={ballRef}>
+              <div
+                className={
+                  strangerToggle ? styles.roboBallNormalWorld : styles.roboBall
+                }
+                ref={ballRef}
+              >
                 <div
                   className={`${styles.eye} ${styles.leftEye}`}
                   ref={leftEyeRef}
@@ -318,7 +362,12 @@ const MainComponent = (props: any) => {
                 ></div>
               </div>
             </div>
-            <div className={`${styles.boxContainer} boxContainer`}>
+            <div
+              ref={ref}
+              className={`${styles.boxContainer} ${
+                strangerToggle ? "boxContainerNormalWorld" : "boxContainer"
+              } fadeLeft ${visible ? "visible" : ""}`}
+            >
               <div className={styles.textSection}>
                 <p className={styles.subtitle}>
                   {
@@ -347,10 +396,7 @@ const MainComponent = (props: any) => {
                 className={`${styles.videoSection} videoSection`}
                 onClick={() => {
                   playSound();
-                  window.open(
-                    "https://www.youtube.com/watch?v=b9EkMc79ZSU",
-                    "_blank"
-                  );
+                  setVideoVisible(true);
                 }}
               >
                 <div className={styles.videoOverlay}>
@@ -376,28 +422,25 @@ const MainComponent = (props: any) => {
               </div>
             </div>
           </div>
-          <QuickLinks />
+          <QuickLinks strangerToggle={strangerToggle} />
           <div className={styles.partyMembersAndDocumentsSection}>
             <div className={styles.PartyMembersContainer}>
-              <PartyMembers />
+              <PartyMembers strangerToggle={strangerToggle} />
             </div>
             <div className={styles.DocumentContainer}>
-              <Documents />
+              <Documents strangerToggle={strangerToggle} />
             </div>
           </div>
           <div className={styles.calendarSection}>
             <div className={styles.tilesContainer}>
-              <PrayerTimings />
+              <PrayerTimings strangerToggle={strangerToggle} />
             </div>
             <div className={styles.calendarContainer}>
-              <Calendar />
+              <Calendar strangerToggle={strangerToggle} />
             </div>
             <div className={styles.shoutOuts}>
-              <Leaves />
+              <Leaves strangerToggle={strangerToggle} />
             </div>
-          </div>
-          <div className={styles.threeDContainer}>
-            <ThreeD />
           </div>
           <div className={styles.Layout}>
             <div className={styles.buttonsContainer}>
@@ -416,18 +459,27 @@ const MainComponent = (props: any) => {
                 </button>
               ))}
             </div>
-
             <div className={styles.tabContent}>{renderContent()}</div>
+            {/* <div className={styles.lightsBottom}>
+              <img
+                src={require("../../../External/pulps.png")}
+                alt="Lights Bottom"
+              ></img>
+            </div> */}
+          </div>
+          <div className={styles.footer}>
+            <Footer strangerToggle={strangerToggle} />
           </div>
         </div>
       </div>
       {/* Stranger Things Popup */}
       <Dialog
         header="Send Feedback"
-        visible={visible}
+        visible={visibles}
         onHide={() => setVisible(false)}
         dismissableMask
         modal
+        className="feedBackDialog"
       >
         <div>
           <div className={styles.inputRow}>
@@ -465,6 +517,45 @@ const MainComponent = (props: any) => {
               }}
             />
           </div>
+        </div>
+      </Dialog>
+
+      {/*stranger things 360 degree popup*/}
+      <Dialog
+        visible={threeDVisible}
+        onHide={() => setThreeDVisible(false)}
+        dismissableMask
+        modal
+        className="threeD"
+      >
+        <div>
+          <ThreeD strangerToggle={strangerToggle} />
+        </div>
+      </Dialog>
+
+      {/* Video popup */}
+      <Dialog
+        visible={videoVisible}
+        onHide={() => setVideoVisible(false)}
+        dismissableMask
+        modal
+        className="videoDialog"
+      >
+        <div style={{ position: "relative", paddingTop: "56.25%" }}>
+          <iframe
+            src="https://www.youtube.com/embed/b9EkMc79ZSU?autoplay=1"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="Stranger Things Trailer"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
         </div>
       </Dialog>
     </>

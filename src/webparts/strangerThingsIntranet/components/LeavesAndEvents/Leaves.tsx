@@ -13,8 +13,10 @@ import "../../../../External/style.css";
 import styles from "./Leaves.module.scss";
 import { Carousel } from "primereact/carousel";
 import commonHeadingSideBarStyle from "../PartyMembers/PartyMembers.module.scss";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const Leaves = () => {
+const Leaves = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const AwardsData = [
     {
       award: "Elite Excellence",
@@ -69,8 +71,17 @@ const Leaves = () => {
   // Card Template for PrimeReact
   const cardTemplate = (item: any) => {
     return (
-      <div className={styles.AwardsCard}>
-        <div className={`${styles.AwardsNameContainer} AwardsNameContainer`}>
+      <div
+        style={strangerToggle ? { background: "#ffffffc9" } : {}}
+        className={styles.AwardsCard}
+      >
+        <div
+          className={`${styles.AwardsNameContainer} ${
+            strangerToggle
+              ? "AwardsNameContainerNormalWorld"
+              : "AwardsNameContainer"
+          }`}
+        >
           {item?.award}
         </div>
         <div className={styles.AwardsImageAndNameContainer}>
@@ -78,14 +89,35 @@ const Leaves = () => {
             <img src={item.image} alt={item.title} />
           </div>
           <div className={styles.NameContainer}>
-            <div className={styles.name}>{item?.name}</div>
-            <div className={styles.title}>{item?.title}</div>
+            <div
+              style={strangerToggle ? { color: "#1e2f73" } : {}}
+              className={styles.name}
+            >
+              {item?.name}
+            </div>
+            <div
+              style={strangerToggle ? { color: "#109d8e" } : {}}
+              className={styles.title}
+            >
+              {item?.title}
+            </div>
           </div>
         </div>
 
-        <div className={styles.discription}>{item.discription}</div>
+        <div
+          style={
+            strangerToggle
+              ? { background: "#ffffffc9", color: "#1e3284e6" }
+              : {}
+          }
+          className={styles.discription}
+        >
+          {item.discription}
+        </div>
         <div className={styles.AwardedByContainer}>
-          <div>by {item?.awardByName}</div>
+          <div style={strangerToggle ? { color: "#1e3284e6" } : {}}>
+            by {item?.awardByName}
+          </div>
           <div className={styles.awardedByImageContainer}>
             <img src={item?.awardBy}></img>
           </div>
@@ -95,13 +127,24 @@ const Leaves = () => {
   };
 
   return (
-    <div className={styles.AwardsContainer}>
-      <h2 className={`${commonHeadingSideBarStyle.heading} heading`}>Awards</h2>
+    <div
+      ref={ref}
+      className={`${styles.AwardsContainer} fadeRight ${
+        visible ? "visible" : ""
+      }`}
+    >
+      <h2
+        className={`${commonHeadingSideBarStyle.heading} ${
+          strangerToggle ? "normalWorlHeading" : "heading"
+        }`}
+      >
+        Awards
+      </h2>
       <Carousel
         value={AwardsData}
         itemTemplate={cardTemplate}
-        numVisible={1} // show 1 card
-        numScroll={1} // move one card at a time
+        numVisible={1}
+        numScroll={1}
         circular
         autoplayInterval={4000}
         showNavigators={true}

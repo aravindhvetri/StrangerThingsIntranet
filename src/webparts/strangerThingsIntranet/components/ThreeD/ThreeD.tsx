@@ -15,8 +15,10 @@ import { useEffect, useRef } from "react";
 import styles from "./ThreeD.module.scss";
 import commonHeadingSideBarStyle from "../PartyMembers/PartyMembers.module.scss";
 
-const ThreeD = () => {
+const ThreeD = ({ strangerToggle }: any) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
+  const strangerthings = require("../../../../External/roomRainbow.png");
+  const mallImage = require("../../../../External/twoKStarCourtMall.png");
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -40,18 +42,8 @@ const ThreeD = () => {
     mountRef.current.appendChild(renderer.domElement);
 
     // Texture (LOCAL / SHAREPOINT IMAGE)
-    const textureLoader = new THREE.TextureLoader();
-    // const texture = new THREE.TextureLoader().load(
-    //   require("../../../../External/roomRainbow.png")
-    // );
-    const texture = textureLoader.load(
-      require("../../../../External/roomRainbow.png"),
-      () => {
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture.needsUpdate = true;
-      }
+    const texture = new THREE.TextureLoader().load(
+      strangerToggle ? mallImage : strangerthings
     );
 
     // Sphere (inside view)
@@ -119,7 +111,12 @@ const ThreeD = () => {
 
   return (
     <div>
-      <h2 className={`${commonHeadingSideBarStyle.heading} heading`}>Awards</h2>
+      <h2
+        style={{ marginBottom: "16px" }}
+        className={`${commonHeadingSideBarStyle.heading} heading`}
+      >
+        Stranger things 3D view
+      </h2>
       <div ref={mountRef} className={styles.wrapper} />
     </div>
   );

@@ -13,8 +13,10 @@ import "../../../../External/style.css";
 import { Calendar as PrimeCalendar } from "primereact/calendar";
 import commonHeadingSideBarStyle from "../PartyMembers/PartyMembers.module.scss";
 import styles from "./Calendar.module.scss";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const Calendar = () => {
+const Calendar = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );
@@ -44,6 +46,24 @@ const Calendar = () => {
       time: "11:00 AM - 12:00 PM",
       type: "Meeting",
     },
+    {
+      date: "2025-12-24",
+      title: "Month End Review",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-29",
+      title: "Month End Review",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-30",
+      title: "Month End Review",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
   ];
 
   const selectedISO = selectedDate
@@ -53,7 +73,6 @@ const Calendar = () => {
     : "";
 
   const filteredEvents = eventsData.filter((e) => e.date === selectedISO);
-  console.log(filteredEvents, selectedDate, "aari");
 
   const dateTemplate = (date: any) => {
     const iso = `${date.year}-${String(date.month + 1).padStart(
@@ -67,8 +86,15 @@ const Calendar = () => {
   };
 
   return (
-    <div className={styles.calendarWrapper}>
-      <h2 className={`${commonHeadingSideBarStyle.heading} heading`}>
+    <div
+      ref={ref}
+      className={`${styles.calendarWrapper} fadeUp ${visible ? "visible" : ""}`}
+    >
+      <h2
+        className={`${commonHeadingSideBarStyle.heading} ${
+          strangerToggle ? "normalWorlHeading" : "heading"
+        }`}
+      >
         Calendar Events
       </h2>
       <PrimeCalendar
@@ -77,6 +103,7 @@ const Calendar = () => {
         inline
         dateTemplate={dateTemplate}
         showOtherMonths
+        className={strangerToggle ? "normal-world-calendar" : "calendar"}
       />
 
       <div className={styles.eventsSection}>

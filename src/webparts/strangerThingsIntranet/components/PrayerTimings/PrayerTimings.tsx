@@ -13,11 +13,12 @@ import "../../../../External/style.css";
 import CommonHeaderStyles from "../PartyMembers/PartyMembers.module.scss";
 import styles from "./PrayerTimings.module.scss";
 import * as moment from "moment";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const PrayerTimings = () => {
+const PrayerTimings = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const moon = require("../../../../External/moon.png");
   const clock = require("../../../../External/clock.png");
-  //   const locationPin = require("../../../../External/pin.png");
   const upcommingTimings = [
     { name: "HR desk", time: "08:30 PM", left: "2 hours left" },
     { name: "IT helpdesk", time: "05:32 AM", left: "12 hours left" },
@@ -25,11 +26,20 @@ const PrayerTimings = () => {
     { name: "As", time: "03:46 PM", left: "22 hours left" },
   ];
   return (
-    <div className={styles.section}>
-      <h2 className={`${CommonHeaderStyles.heading} heading`}>
+    <div
+      ref={ref}
+      className={`${styles.section} fadeLeft ${visible ? "visible" : ""}`}
+    >
+      <h2
+        className={`${CommonHeaderStyles.heading} ${
+          strangerToggle ? "normalWorlHeading" : "heading"
+        }`}
+      >
         Starcourt Mall timings
       </h2>
-      <div className="starcourtMall">
+      <div
+        className={strangerToggle ? "starCourtNormalWorld" : "starcourtMall"}
+      >
         <div className={styles.highlightContainer}>
           <div className={styles.circleContainer}>
             <div>
@@ -53,7 +63,7 @@ const PrayerTimings = () => {
         <div className={styles.upCommingPrayersTimeContainer}>
           <h2
             style={{ fontSize: "13px", marginBottom: "14px" }}
-            className={`heading`}
+            className={`${strangerToggle ? "normalWorlHeading" : "heading"}`}
           >
             upcoming timings
           </h2>
