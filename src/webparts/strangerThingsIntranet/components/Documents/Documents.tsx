@@ -11,8 +11,10 @@
 import * as React from "react";
 import styles from "./Documents.module.scss";
 import "../../../../External/style.css";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const Documents = () => {
+const Documents = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const requestForm = require("../../../../External/profiles.png");
   const applications = require("../../../../External/survey-form.png");
   const templates = require("../../../../External/layout.png");
@@ -46,15 +48,38 @@ const Documents = () => {
     },
   ];
   return (
-    <div className={styles.DocumentsContainer}>
-      <h2 className={`${styles.heading} heading`}>Party rules</h2>
+    <div
+      ref={ref}
+      className={`${styles.DocumentsContainer} fadeRight ${
+        visible ? "visible" : ""
+      }`}
+    >
+      <h2
+        className={`${styles.heading} ${
+          strangerToggle ? "normalWorlHeading" : "heading"
+        }`}
+      >
+        Party rules
+      </h2>
       <div className={styles.DocumentSection}>
         {Documents.map((items, i) => (
-          <div className={styles.DocumentCard} key={i}>
-            <div className={styles.ImageContainer}>
+          <div
+            style={strangerToggle ? { background: "#ffffffc9" } : {}}
+            className={styles.DocumentCard}
+            key={i}
+          >
+            <div
+              style={strangerToggle ? { background: "#1e3284e6" } : {}}
+              className={styles.ImageContainer}
+            >
               <img src={items?.imageUrl}></img>
             </div>
-            <div className={styles.documentName}>{items?.documentName}</div>
+            <div
+              style={strangerToggle ? { color: "#1e3284e6" } : {}}
+              className={styles.documentName}
+            >
+              {items?.documentName}
+            </div>
           </div>
         ))}
       </div>

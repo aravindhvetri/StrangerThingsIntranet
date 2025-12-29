@@ -11,28 +11,23 @@
       justify-content: space-between;
       align-items: center;
       .logo {
-        width: 200px;
+        width: 176px;
+        height: 86px;
+        margin-left: 14px;
         img {
           width: 100%;
-          height: auto;
+          height: 100%;
         }
       }
-      .profile_header_user {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        .profile_name {
-          font-size: 14px;
-        }
-        .profile_Image {
-          width: 27px;
-          height: 27px;
-          img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-          }
+
+      .profile_Image {
+        width: 34px;
+        height: 34px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
         }
       }
     }
@@ -54,7 +49,21 @@
       padding: 40px 20px 40px 20px;
     }
     .welcomeContainer {
-      width: 80%;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      .viewImageContainer {
+        cursor: pointer;
+        margin-top: 20px;
+        width: 40px;
+        height: 40px;
+        animation: floatUpDown 3s ease-in-out infinite;
+        img {
+          width: 100%;
+          height: 100%;
+          animation: starGlow 1.8s ease-in-out infinite;
+        }
+      }
     }
     .textSection {
       width: 25%;
@@ -78,6 +87,29 @@
         will-change: transform;
       }
     }
+  }
+}
+
+.titleNormalWorld {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(178deg, var(--white) 0%, var(--white) 100%);
+  font-family: monospace;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulseWhite 3s infinite ease-in-out;
+}
+
+@keyframes glowPulseWhite {
+  0% {
+    filter: drop-shadow(0 0 0px #1e3284e6);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px #1e3284e6);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px #1e3284e6);
   }
 }
 
@@ -191,6 +223,16 @@
   transition: transform 0.1s linear;
   animation: pulse 2s infinite ease-in-out;
 }
+.roboBallNormalWorld {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle at 30% 30%, #ffffffb8, #ffffff00);
+  border-radius: 50%;
+  box-shadow: 0 0 40px #00f0ff20 inset, 0 0 40px #00f0ff10;
+  position: relative;
+  transition: transform 0.1s linear;
+  animation: pulse 2s infinite ease-in-out;
+}
 
 .eye {
   position: absolute;
@@ -234,12 +276,14 @@
 }
 
 .navbar {
-  margin-right: 20px;
   ul {
     display: flex;
     list-style-type: none;
     margin: 0;
-    gap: 68px;
+    gap: 50px;
+    border-radius: 30px;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.148);
   }
   li {
     display: flex;
@@ -247,7 +291,6 @@
     gap: 6px;
     position: relative;
     margin: 0;
-    position: relative;
     cursor: pointer;
     transition: transform 220ms ease;
   }
@@ -461,7 +504,7 @@
 .Layout {
   width: 85%;
   margin: auto;
-  padding-top: 24px;
+  padding-top: 20px;
 }
 
 .buttonsContainer {
@@ -554,6 +597,18 @@
 .tabContent {
   margin-top: 15px;
   animation: fadeIn 0.3s ease;
+  position: relative;
+}
+.lightsBottom {
+  position: absolute;
+  width: 474px;
+  top: 244%;
+  left: 33%;
+  animation: fadeIn 0.3s ease;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @keyframes fadeIn {
@@ -606,4 +661,38 @@
 .threeDContainer {
   width: 86%;
   margin: auto;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes starGlow {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0.4));
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0.4));
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+.footer {
+  width: 100%;
 }

@@ -11,8 +11,10 @@
 import * as React from "react";
 import styles from "./PartyMembers.module.scss";
 import "../../../../External/style.css";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const PartyMembers = () => {
+const PartyMembers = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const members = [
     {
       name: "Derek Swinton",
@@ -37,17 +39,38 @@ const PartyMembers = () => {
     },
   ];
   return (
-    <div className={`${styles.PartyMain}`}>
-      <h2 className={`${styles.heading} heading`}>
+    <div
+      ref={ref}
+      className={`${styles.PartyMain} fadeUp ${visible ? "visible" : ""}`}
+    >
+      <h2
+        className={`${styles.heading} ${
+          strangerToggle ? "normalWorlHeading" : "heading"
+        }`}
+      >
         Meet your new party members
       </h2>
 
       <div className={styles.MemberFlex}>
         {members.map((m, i) => (
-          <div className={`${styles.Card} card`} key={i}>
-            <h3 className={styles.Name}>{m.name}</h3>
+          <div
+            className={`${styles.Card} ${
+              strangerToggle ? "cardNormalWorld" : "card"
+            }`}
+            key={i}
+          >
+            <h3
+              className={strangerToggle ? styles.NameNormalWorld : styles.Name}
+            >
+              {m.name}
+            </h3>
 
-            <p className={styles.Desc}>{m.desc}</p>
+            <p
+              style={strangerToggle ? { color: "#394885e6" } : {}}
+              className={styles.Desc}
+            >
+              {m.desc}
+            </p>
 
             <div className={styles.ImgBox}>
               <img src={m.img} alt={m.name} />

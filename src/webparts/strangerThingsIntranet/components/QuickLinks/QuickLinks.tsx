@@ -13,8 +13,10 @@ import styles from "./QuickLinks.module.scss";
 import { useEffect, useState } from "react";
 import SPServices from "../../../../CommonServices/SPServices";
 import { Config } from "../../../../CommonServices/Config";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const QuickLinks = () => {
+const QuickLinks = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const [quickLinkData, setQuickLinkData] = useState<any>([]);
 
   //Initial render:
@@ -54,7 +56,12 @@ const QuickLinks = () => {
   };
 
   return (
-    <div className={styles.QuickLinkSection}>
+    <div
+      ref={ref}
+      className={`${styles.QuickLinkSection} fadeRight ${
+        visible ? "visible" : ""
+      }`}
+    >
       <div className={styles.QuickLinkContainer}>
         {quickLinkData.map((items: any) => (
           <div className={styles.QuickLinkBox}>

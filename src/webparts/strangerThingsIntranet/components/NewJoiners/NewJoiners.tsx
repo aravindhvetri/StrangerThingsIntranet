@@ -1,8 +1,10 @@
 import * as React from "react";
 import "../../../../External/style.css";
 import styles from "./NewJoiners.module.scss";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const NewJoiners = () => {
+const NewJoiners = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const newJoinersData = [
     {
       id: 1,
@@ -63,8 +65,13 @@ const NewJoiners = () => {
   ];
 
   return (
-    <div className={styles.container}>
-      <h2 className="heading">Organizers</h2>
+    <div
+      ref={ref}
+      className={`${styles.container} fadeDown ${visible ? "visible" : ""}`}
+    >
+      <h2 className={strangerToggle ? "normalWorlHeading" : "heading"}>
+        Organizers
+      </h2>
 
       <div className={styles.grid}>
         {newJoinersData.map((user, index) => (

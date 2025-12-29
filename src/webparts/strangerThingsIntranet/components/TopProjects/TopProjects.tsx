@@ -12,8 +12,10 @@ import * as React from "react";
 import styles from "./TopProject.module.scss";
 import { Chart } from "react-google-charts";
 import "../../../../External/style.css";
+import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const TopProjects = () => {
+const TopProjects = ({ strangerToggle }: any) => {
+  const { ref, visible } = useScrollReveal();
   const salesData = [
     ["Month", "Sales"],
     ["January", 150],
@@ -88,8 +90,16 @@ const TopProjects = () => {
     },
   ];
   return (
-    <div className={styles.topProjectsContainer}>
-      <h2 className="heading" style={{ marginBottom: "0" }}>
+    <div
+      ref={ref}
+      className={`${styles.topProjectsContainer} fadeLeft ${
+        visible ? "visible" : ""
+      }`}
+    >
+      <h2
+        className={strangerToggle ? "normalWorlHeading" : "heading"}
+        style={{ marginBottom: "0" }}
+      >
         Latest status
       </h2>
       {/* Cards */}

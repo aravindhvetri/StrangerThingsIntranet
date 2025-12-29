@@ -64,6 +64,16 @@
   }
 }
 
+.NameNormalWorld {
+  font-size: 15px;
+  margin-bottom: 12px;
+  position: relative;
+  color: #1e3284e6;
+  letter-spacing: 0.3px;
+  animation: blueFireGlow 2s ease-in-out infinite,
+    blueFireFlicker 0.12s infinite alternate;
+}
+
 .Name {
   font-size: 15px;
   margin-bottom: 12px;
