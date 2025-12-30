@@ -17,54 +17,72 @@ import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
 const Leaves = ({ strangerToggle }: any) => {
   const { ref, visible } = useScrollReveal();
+  const rameshNaaGemini = require("../../../../External/rameshNaaGemini.png");
+  const kaliNaaGemini = require("../../../../External/kaliNaaGemini.png");
+  const meGemini = require("../../../../External/meGemini.png");
   const AwardsData = [
     {
       award: "Elite Excellence",
-      name: "Meghan Goyette",
-      title: "Assurance Specialist",
+      name: "Aari Mike",
+      title: "Shadow Mastermind",
       discription:
-        "Employee recognition is vital in creating a positive work environment. Giving recognition awards can significantly boost morale, enhance job satisfaction, and increase employee engagement. When employees feel appreciated, they are more likely to stay motivated, productive, and loyal to the company, The wording on these awards plays a key role in expressing genuine appreciation.",
-      image:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-      awardBy:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-      awardByName: "Sabina Saetgareeva",
+        "Navigating the shadows with unmatched strategy, he anticipates dangers long before they surface, reading the silence, the patterns, and the unseen threats that others miss. Across shifting dimensions and unstable realities, he keeps the team protected through calculated moves, and the ability to turn chaos into control. When paths fracture and worlds collide, his strategy ensures everyone makes it back safely.",
+      image: meGemini,
+      awardBy: kaliNaaGemini,
+      awardByName: "Billy Kali",
     },
     {
       award: "Silvar Spark",
-      name: "Jodie Palmer",
-      title: "Product Manager",
+      name: "Billy Kali",
+      title: "Shadow Manager",
       discription:
-        "Employee recognition is vital in creating a positive work environment. Giving recognition awards can significantly boost morale, enhance job satisfaction, and increase employee engagement. When employees feel appreciated, they are more likely to stay motivated, productive, and loyal to the company, The wording on these awards plays a key role in expressing genuine appreciation.",
-      image:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-      awardBy:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-      awardByName: "Sabina Saetgareeva",
+        "Operating behind the scenes, the Shadow Manager controls every move without being seen.He reads the silence, predicts chaos, and guides the team before danger reveals itself.While others face the frontlines, he protects reality from slipping into darkness.Across dimensions and broken paths, his strategy keeps everyone alive.In the Normal World or the Upside Down, his presence is felteven when he's unseen",
+      image: kaliNaaGemini,
+      awardBy: rameshNaaGemini,
+      awardByName: "Dustin Ramesh",
     },
     {
+      award: "Elite Gold",
+      name: "Dustin Ramesh",
+      title: "Shadow Mastermind",
+      discription:
+        "Navigating the shadows with unmatched strategy, he anticipates dangers long before they surface, reading the silence, the patterns, and the unseen threats that others miss. Across shifting dimensions and unstable realities, he keeps the team protected through calculated moves, and the ability to turn chaos into control. When paths fracture and worlds collide, his strategy ensures everyone makes it back safely.",
+      image: rameshNaaGemini,
+      awardBy: meGemini,
+      awardByName: "Aari Mike",
+    },
+  ];
+
+  const NormalWorldAwardsData = [
+    {
       award: "Elite Excellence",
-      name: "Meghan Goyette",
+      name: "Dustin Ramesh",
       title: "Assurance Specialist",
       discription:
         "Employee recognition is vital in creating a positive work environment. Giving recognition awards can significantly boost morale, enhance job satisfaction, and increase employee engagement. When employees feel appreciated, they are more likely to stay motivated, productive, and loyal to the company, The wording on these awards plays a key role in expressing genuine appreciation.",
-      image:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-      awardBy:
-        "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=600&q=80",
-      awardByName: "Sabina Saetgareeva",
+      image: rameshNaaGemini,
+      awardBy: kaliNaaGemini,
+      awardByName: "Billy Kali",
     },
     {
-      award: "Elite Excellence",
-      name: "Meghan Goyette",
-      title: "Assurance Specialist",
+      award: "Best Employee",
+      name: "Aari Mike",
+      title: "Technical Lead",
       discription:
         "Employee recognition is vital in creating a positive work environment. Giving recognition awards can significantly boost morale, enhance job satisfaction, and increase employee engagement. When employees feel appreciated, they are more likely to stay motivated, productive, and loyal to the company, The wording on these awards plays a key role in expressing genuine appreciation.",
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-      awardBy:
-        "https://images.unsplash.com/photo-1545996124-0501ebae84d0?auto=format&fit=crop&w=600&q=80",
-      awardByName: "Sabina Saetgareeva",
+      image: meGemini,
+      awardBy: kaliNaaGemini,
+      awardByName: "Billy Kali",
+    },
+    {
+      award: "Gold Spark",
+      name: "Billy Kali",
+      title: "Technical Manager",
+      discription:
+        "Employee recognition is vital in creating a positive work environment. Giving recognition awards can significantly boost morale, enhance job satisfaction, and increase employee engagement. When employees feel appreciated, they are more likely to stay motivated, productive, and loyal to the company, The wording on these awards plays a key role in expressing genuine appreciation.",
+      image: kaliNaaGemini,
+      awardBy: rameshNaaGemini,
+      awardByName: "Dustin Ramesh",
     },
   ];
 
@@ -141,7 +159,7 @@ const Leaves = ({ strangerToggle }: any) => {
         Awards
       </h2>
       <Carousel
-        value={AwardsData}
+        value={strangerToggle ? NormalWorldAwardsData : AwardsData}
         itemTemplate={cardTemplate}
         numVisible={1}
         numScroll={1}

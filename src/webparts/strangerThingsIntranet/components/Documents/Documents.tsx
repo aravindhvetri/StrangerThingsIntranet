@@ -24,27 +24,54 @@ const Documents = ({ strangerToggle }: any) => {
   const Documents = [
     {
       imageUrl: requestForm,
-      documentName: "Request forms",
+      documentName: "Shadow Conduct Guidelines",
     },
     {
       imageUrl: applications,
-      documentName: "Applications",
+      documentName: "Portal Security Protocols",
     },
     {
       imageUrl: templates,
-      documentName: "Templates",
+      documentName: "Dark Leave Policy",
     },
     {
       imageUrl: projects,
-      documentName: "Projects",
+      documentName: "Dimensional Travel Rules",
     },
     {
       imageUrl: employeeHandBook,
-      documentName: "Employee handbook",
+      documentName: "Monster Safety Manual",
     },
     {
       imageUrl: marketing,
-      documentName: "Marketing collateral",
+      documentName: "Shadow Attendance Log",
+    },
+  ];
+
+  const DocumentsNormalWorld = [
+    {
+      imageUrl: requestForm,
+      documentName: "Employee Code of Conduct",
+    },
+    {
+      imageUrl: applications,
+      documentName: "IT Security Guidelines",
+    },
+    {
+      imageUrl: templates,
+      documentName: "Leave Policy",
+    },
+    {
+      imageUrl: projects,
+      documentName: "Travel & Expense Policy",
+    },
+    {
+      imageUrl: employeeHandBook,
+      documentName: "Performance Review Policy",
+    },
+    {
+      imageUrl: marketing,
+      documentName: "marketing materials",
     },
   ];
   return (
@@ -62,7 +89,7 @@ const Documents = ({ strangerToggle }: any) => {
         Party rules
       </h2>
       <div className={styles.DocumentSection}>
-        {Documents.map((items, i) => (
+        {(strangerToggle ? DocumentsNormalWorld : Documents).map((items, i) => (
           <div
             style={strangerToggle ? { background: "#ffffffc9" } : {}}
             className={styles.DocumentCard}

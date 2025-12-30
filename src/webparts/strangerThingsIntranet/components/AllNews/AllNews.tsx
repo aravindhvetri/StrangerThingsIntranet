@@ -16,42 +16,89 @@ import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
 const AllNews = ({ strangerToggle }: any) => {
   const { ref, visible } = useScrollReveal();
+  const anomaly = require("../../../../External/anomaly.jpg");
+  const sightingReport = require("../../../../External/MonsterSightingReport.jpg");
+  const firstShadow = require("../../../../External/firstShadow.jpg");
+  const shadowTeam = require("../../../../External/shadowTeam.jpg");
+  const menu = require("../../../../External/menu.jpg");
+  const teamWorkshop = require("../../../../External/teamWorkshop.jpg");
+  const employeeReg = require("../../../../External/employeeReg.jpg");
+  const ourTeam = require("../../../../External/ourTeam.jpg");
   const newsData = [
     {
-      author: "Sabina Saetgareeva",
-      date: "July 30 2024",
-      title: "Building Relationships with Partners and Communities",
+      author: "Aravindh Aari",
+      date: "July 30 2025",
+      title:
+        "Strange dimensional shifts have been observed near the Shadow Bazaar. Stay alert!",
       comments: 0,
       likes: 4,
-      image:
-        "https://images.pexels.com/photos/4355348/pexels-photo-4355348.jpeg",
+      image: anomaly,
     },
     {
-      author: "Andrew Calston (Admin)",
-      date: "January 4 2024",
-      title: "Building Relationships with Partners and Communities",
+      author: "Ramesh (Admin)",
+      date: "January 4 2025",
+      title:
+        "The patrol team has reported sightings of unknown creatures in the northern tunnels.",
       comments: 0,
       likes: 2,
-      image:
-        "https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg",
+      image: sightingReport,
     },
     {
-      author: "Andrew Calston",
-      date: "January 4 2024",
-      title: "Building Relationships with Partners and Communities",
+      author: "kali",
+      date: "January 20 2025",
+      title:
+        "All members are invited to the secret gathering under the full moon to strategize next moves.",
       comments: 0,
       likes: 0,
-      image: "https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg",
+      image: firstShadow,
     },
     {
-      author: "Sarah Wilson",
-      date: "August 12 2024",
+      author: "Kali Aari",
+      date: "August 12 2025",
+      title:
+        "How Our shadow team is Transforming Collaboration and shadow based collaboration",
+      comments: 1,
+      likes: 3,
+      image: shadowTeam,
+    },
+  ];
+
+  const NormalWorldnewsData = [
+    {
+      author: "Ramesh",
+      date: "July 30 2024",
+      title:
+        "Discover the latest healthy and delicious options now available at the cafeteria.",
+      comments: 0,
+      likes: 4,
+      image: menu,
+    },
+    {
+      author: "Kali (Admin)",
+      date: "January 4 2024",
+      title:
+        "Join us this Friday for a workshop on productivity and collaboration techniques.",
+      comments: 0,
+      likes: 2,
+      image: teamWorkshop,
+    },
+    {
+      author: "Aravindh Aari",
+      date: "January 28 2025",
+      title:
+        "Celebrating the achievements of our outstanding employees this month",
+      comments: 0,
+      likes: 0,
+      image: employeeReg,
+    },
+    {
+      author: "Ramesh Aari",
+      date: "August 02 2025",
       title:
         "How Our Team is Transforming Collaboration and web based collaboration",
       comments: 1,
       likes: 3,
-      image:
-        "https://images.pexels.com/photos/3183198/pexels-photo-3183198.jpeg",
+      image: ourTeam,
     },
   ];
 
@@ -99,12 +146,12 @@ const AllNews = ({ strangerToggle }: any) => {
         All news
       </h2>
       <Carousel
-        value={newsData}
+        value={strangerToggle ? NormalWorldnewsData : newsData}
         itemTemplate={cardTemplate}
         numVisible={3}
         numScroll={1}
         circular
-        // autoplayInterval={4000}
+        autoplayInterval={4000}
         showNavigators={true}
         showIndicators={true}
         className={styles.NewsCarousel}

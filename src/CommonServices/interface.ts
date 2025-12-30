@@ -9,6 +9,7 @@ export interface IListNames {
   FeedBack: string;
   StrangerThingsMasterList: string;
   QuickLinks: string;
+  StrangerThingsMasterNormalWorldList: string;
 }
 
 //Toaster Interface

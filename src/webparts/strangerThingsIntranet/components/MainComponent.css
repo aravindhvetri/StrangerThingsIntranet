@@ -5,15 +5,16 @@
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
     url("../../../External/tenor.gif") center/cover no-repeat;
   position: relative;
+  animation: upsideDownRotateIn 1.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .hero-container::before {
   content: "";
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: -54px;
   left: 0px;
-  width: 132px;
-  height: 100vh;
+  width: 148px;
+  height: 114vh;
   background: url("../../../External/demoHands.png") no-repeat;
   background-size: cover;
   background-position: left center;
@@ -23,11 +24,11 @@
 
 .hero-container::after {
   content: "";
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: -54px;
   right: 0px;
-  width: 132px;
-  height: 100vh;
+  width: 148px;
+  height: 114vh;
   background: url("../../../External/demoHands.png") no-repeat;
   background-size: cover;
   background-position: right center;
@@ -38,48 +39,16 @@
 .normal-world {
   background: linear-gradient(#0707073e, #0e0e0ebb),
     url("../../../External/labMorning.png") center/cover no-repeat;
-  animation: hawkinsDropRotate 3.5s ease-in-out forwards;
 }
 
-@keyframes hawkinsDropRotate {
+@keyframes upsideDownRotateIn {
   0% {
-    transform: translateY(-120vh) rotate(-8deg) scale(1.15);
+    transform: rotate(180deg) scale(1.05);
     opacity: 0;
   }
-
-  30% {
-    transform: translateY(-30vh) rotate(6deg) scale(1.1);
-    opacity: 1;
-  }
-
-  60% {
-    transform: translateY(10vh) rotate(-3deg) scale(1.04);
-  }
-
-  85% {
-    transform: translateY(-2vh) rotate(1.2deg) scale(1.01);
-  }
-
-  100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-}
-
-@keyframes hawkinsRotateSettle {
-  0% {
-    transform: rotate(-4deg) scale(1.1);
-  }
-
-  35% {
-    transform: rotate(3deg) scale(1.06);
-  }
-
-  65% {
-    transform: rotate(-1.5deg) scale(1.03);
-  }
-
   100% {
     transform: rotate(0deg) scale(1);
+    opacity: 1;
   }
 }
 
@@ -96,8 +65,8 @@
 .boxContainer {
   height: 300px;
   border-radius: 14px;
-  background: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)),
-    url("../../../External/RedWorld.jpg") center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.474), rgba(0, 0, 0, 0.447)),
+    url("../../../External/redThemeBanner.jpg") top/cover no-repeat;
 }
 .boxContainerNormalWorld {
   height: 300px;
