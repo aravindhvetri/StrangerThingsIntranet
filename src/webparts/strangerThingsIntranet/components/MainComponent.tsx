@@ -49,12 +49,16 @@ const MainComponent = (props: any) => {
   const ballRef: any = useRef(null);
   const toast = useRef<Toast>(null);
   const [visibles, setVisible] = useState(false);
-  const [strangerToggle, setStrangerToggle] = useState<boolean>(false);
+  const [strangerToggle, setStrangerToggle] = useState<boolean>(true);
   const [threeDVisible, setThreeDVisible] = useState(false);
   const [formData, setFormData] = useState<any>({});
   const [strangerThingsMasterData, setStrangerThingsMasterData] = useState<any>(
     []
   );
+  const [
+    strangerThingsMasterNormalWorldData,
+    setStrangerThingsMasterNormalWorldData,
+  ] = useState<any>([]);
   const tabs = ["All news", "Marketings", "Top organizers"];
   const [activeTab, setActiveTab] = useState("All news");
   const userDetails: IUserDetails = {
@@ -222,7 +226,7 @@ const MainComponent = (props: any) => {
 
     requestAnimationFrame(animateEyes);
     getStrangerThingsMasterDatas();
-
+    getStrangerThingsMasterNormalWorldDatas();
     return () => {
       window.removeEventListener("mousemove", handleGlobalMouse);
       window.removeEventListener("mouseout", handleLeave);
@@ -255,16 +259,46 @@ const MainComponent = (props: any) => {
       });
   };
 
+  //fetch normal world master data:
+  const getStrangerThingsMasterNormalWorldDatas = () => {
+    SPServices.SPReadItems({
+      Listname: Config.ListNames.StrangerThingsMasterNormalWorldList,
+      Select: "*",
+      Orderby: "Modified",
+      Orderbydecorasc: true,
+    })
+      .then((res: any) => {
+        let strangerThingsMasterData: any = [];
+        res?.forEach((items: any) => {
+          strangerThingsMasterData.push({
+            Title: items?.Title,
+            Description: items?.Description,
+            AnnouncementTitle: items?.AnnouncementTitle,
+            AnnouncementDescription: items?.AnnouncementDescription,
+            AnnouncementImage: items?.AnnouncementImage,
+          });
+        });
+        setStrangerThingsMasterNormalWorldData([...strangerThingsMasterData]);
+      })
+      .catch((err) => {
+        console.log(err, "err in getStrangerThingsMasterDatas");
+      });
+  };
+
+  const normalWorldItem = strangerThingsMasterNormalWorldData?.find(
+    (item: any) => (item?.Title ?? "").trim() !== ""
+  );
+
   return (
     <>
       <div className={strangerToggle ? "normal-world" : "hero-container"}>
         <Toast ref={toast} position="top-right" className="stranger-toast" />
-        {/* <audio autoPlay loop>
+        <audio autoPlay loop>
           <source
             src={`${absoluteURL}/SiteAssets/strangerthings_remix.mp3`}
             type="audio/mpeg"
           />
-        </audio> */}
+        </audio>
         <div className={styles.section}>
           <div
             className={`${styles.headerSection} headerSection ${
@@ -370,18 +404,18 @@ const MainComponent = (props: any) => {
             >
               <div className={styles.textSection}>
                 <p className={styles.subtitle}>
-                  {
-                    strangerThingsMasterData.find(
-                      (item: any) => (item?.Title ?? "").trim() !== ""
-                    )?.Title
-                  }
+                  {strangerToggle
+                    ? normalWorldItem?.Title
+                    : strangerThingsMasterData.find(
+                        (item: any) => (item?.Title ?? "").trim() !== ""
+                      )?.Title}
                 </p>
                 <div className={styles.description}>
-                  {
-                    strangerThingsMasterData.find(
-                      (item: any) => (item?.Description ?? "").trim() !== ""
-                    )?.Description
-                  }
+                  {strangerToggle
+                    ? normalWorldItem?.Description
+                    : strangerThingsMasterData.find(
+                        (item: any) => (item?.Description ?? "").trim() !== ""
+                      )?.Description}
                 </div>
                 <Button
                   label="Send feedback"
@@ -407,12 +441,12 @@ const MainComponent = (props: any) => {
                 </div>
               </div>
               <div className={styles.announcements}>
-                {strangerThingsMasterData?.map((item: any, index: number) => (
+                {(strangerToggle
+                  ? strangerThingsMasterNormalWorldData
+                  : strangerThingsMasterData
+                )?.map((item: any, index: number) => (
                   <div className={styles.announceCard} key={index}>
-                    <img
-                      src={`${item?.AnnouncementImage?.Url}` || ""}
-                      alt="no image"
-                    />
+                    <img src={item?.AnnouncementImage?.Url || ""} />
                     <div>
                       <h4>{item?.AnnouncementTitle}</h4>
                       <p>{item?.AnnouncementDescription}</p>

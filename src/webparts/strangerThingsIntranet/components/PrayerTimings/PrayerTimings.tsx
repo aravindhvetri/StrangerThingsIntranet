@@ -20,10 +20,20 @@ const PrayerTimings = ({ strangerToggle }: any) => {
   const moon = require("../../../../External/moon.png");
   const clock = require("../../../../External/clock.png");
   const upcommingTimings = [
-    { name: "HR desk", time: "08:30 PM", left: "2 hours left" },
-    { name: "IT helpdesk", time: "05:32 AM", left: "12 hours left" },
-    { name: "Cafeteria", time: "12:23 PM", left: "20 hours left" },
-    { name: "As", time: "03:46 PM", left: "22 hours left" },
+    { name: "Shadow Gate Opens", time: "12:00 AM - 12:00 PM", left: "" },
+    {
+      name: "Secret Lab Access",
+      time: "1:00 AM – 5:00 AM",
+      left: "",
+    },
+    { name: "Dark Market Stalls", time: "2:00 AM - 03:00 AM", left: "" },
+    { name: "Monster Patrol", time: "11:00 PM - 12:00 AM", left: "" },
+  ];
+  const upcommingTimingsNormalWorldData = [
+    { name: "Gate Opens", time: "08:30 PM", left: "2 hours left" },
+    { name: "Service desk", time: "05:32 AM", left: "12 hours left" },
+    { name: "Food court", time: "10:00 AM", left: "20 hours left" },
+    { name: "parking", time: "07:00 AM", left: "22 hours left" },
   ];
   return (
     <div
@@ -35,7 +45,7 @@ const PrayerTimings = ({ strangerToggle }: any) => {
           strangerToggle ? "normalWorlHeading" : "heading"
         }`}
       >
-        Starcourt Mall timings
+        {strangerToggle ? "Starcourt Mall timings" : "Shadow Bazaar Timings"}
       </h2>
       <div
         className={strangerToggle ? "starCourtNormalWorld" : "starcourtMall"}
@@ -47,7 +57,9 @@ const PrayerTimings = ({ strangerToggle }: any) => {
                 <img src={moon} alt="no image"></img>
               </div>
               <div className={styles.time}>06:30 PM</div>
-              <div className={styles.text}>Help desk call</div>
+              <div className={styles.text}>
+                {strangerToggle ? "Mall Starting" : "Dawn Portal"}
+              </div>
             </div>
           </div>
           <div className={styles.textContainer}>
@@ -68,7 +80,10 @@ const PrayerTimings = ({ strangerToggle }: any) => {
             upcoming timings
           </h2>
 
-          {upcommingTimings.map((item, index) => (
+          {(strangerToggle
+            ? upcommingTimingsNormalWorldData
+            : upcommingTimings
+          ).map((item, index) => (
             <div key={index} className={styles.prayerRow}>
               <div className={styles.left}>
                 <div className={styles.clockCircle}>

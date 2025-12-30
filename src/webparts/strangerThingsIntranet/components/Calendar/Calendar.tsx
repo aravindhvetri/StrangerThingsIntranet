@@ -24,43 +24,58 @@ const Calendar = ({ strangerToggle }: any) => {
   const eventsData = [
     {
       date: "2025-12-19",
-      title: "New Hire Orientation",
+      title: "Portal Exploration",
       time: "3:00 PM - 4:00 PM",
       type: "Get-together",
     },
     {
       date: "2025-12-16",
-      title: "Demo Call Org Level",
+      title: "Monster Watch",
       time: "12:00 PM - 12:30 PM",
       type: "Get-together",
     },
     {
       date: "2025-12-17",
-      title: "Month End Review",
-      time: "11:00 AM - 12:00 PM",
-      type: "Meeting",
-    },
-    {
-      date: "2025-12-28",
-      title: "Month End Review",
-      time: "11:00 AM - 12:00 PM",
-      type: "Meeting",
-    },
-    {
-      date: "2025-12-24",
-      title: "Month End Review",
-      time: "11:00 AM - 12:00 PM",
-      type: "Meeting",
-    },
-    {
-      date: "2025-12-29",
-      title: "Month End Review",
+      title: "Dimensional Research",
       time: "11:00 AM - 12:00 PM",
       type: "Meeting",
     },
     {
       date: "2025-12-30",
-      title: "Month End Review",
+      title: "Shadow Gathering",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-31",
+      title: "Escape Drill",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+  ];
+
+  const NormalWorldeventsData = [
+    {
+      date: "2025-12-24",
+      title: "Team Meeting",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-29",
+      title: "Training Session",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-30",
+      title: "HR Workshop",
+      time: "11:00 AM - 12:00 PM",
+      type: "Meeting",
+    },
+    {
+      date: "2025-12-31",
+      title: "Townhall",
       time: "11:00 AM - 12:00 PM",
       type: "Meeting",
     },
@@ -72,7 +87,9 @@ const Calendar = ({ strangerToggle }: any) => {
       ).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`
     : "";
 
-  const filteredEvents = eventsData.filter((e) => e.date === selectedISO);
+  const filteredEvents = (
+    strangerToggle ? NormalWorldeventsData : eventsData
+  ).filter((e) => e.date === selectedISO);
 
   const dateTemplate = (date: any) => {
     const iso = `${date.year}-${String(date.month + 1).padStart(
@@ -80,7 +97,9 @@ const Calendar = ({ strangerToggle }: any) => {
       "0"
     )}-${String(date.day).padStart(2, "0")}`;
 
-    const hasEvent = eventsData.some((e) => e.date === iso);
+    const hasEvent = (strangerToggle ? NormalWorldeventsData : eventsData).some(
+      (e) => e.date === iso
+    );
 
     return <div className={hasEvent ? styles.hasEvent : ""}>{date.day}</div>;
   };

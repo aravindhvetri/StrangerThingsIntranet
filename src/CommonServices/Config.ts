@@ -6,5 +6,6 @@ export namespace Config {
     FeedBack: "FeedBack",
     StrangerThingsMasterList: "StrangerThingsMasterList",
     QuickLinks: "QuickLinks",
+    StrangerThingsMasterNormalWorldList: "StrangerThingsMasterNormalWorldList",
   };
 }

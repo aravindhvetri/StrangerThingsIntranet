@@ -142,7 +142,10 @@
   margin-bottom: 12px;
 }
 .description {
-  padding-bottom: 22px;
+  height: 130px;
+  margin-bottom: 22px;
+  padding-right: 1px;
+  overflow: auto;
 }
 
 .glowButton {

@@ -18,11 +18,12 @@ import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 const QuickLinks = ({ strangerToggle }: any) => {
   const { ref, visible } = useScrollReveal();
   const [quickLinkData, setQuickLinkData] = useState<any>([]);
+  const contentType = strangerToggle ? "white" : "dark";
 
   //Initial render:
   useEffect(() => {
     getQuickLinksDatas();
-  }, []);
+  }, [strangerToggle]);
 
   const getQuickLinksDatas = () => {
     SPServices.SPReadItems({
@@ -36,6 +37,11 @@ const QuickLinks = ({ strangerToggle }: any) => {
           FilterKey: "IsActive",
           Operator: "eq",
           FilterValue: "1",
+        },
+        {
+          FilterKey: "DarkAndWhiteContent",
+          Operator: "eq",
+          FilterValue: contentType,
         },
       ],
     })

@@ -15,27 +15,53 @@ import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
 const PartyMembers = ({ strangerToggle }: any) => {
   const { ref, visible } = useScrollReveal();
+  const rameshNaaGemini = require("../../../../External/rameshNaaGemini.png");
+  const kaliNaaGemini = require("../../../../External/kaliNaaGemini.png");
+  const meGemini = require("../../../../External/meGemini.png");
   const members = [
     {
-      name: "Derek Swinton",
-      desc: "Derek Swinton is a Director of Engineering. He is responsible for leading engineering operations and driving innovation.",
-      img: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
+      name: "Dustin Ramesh",
+      desc: "Shadow Strategist Agent- Mastermind lurking where shadows meet reality pulling unseen strings and outwitting every challenge with precision.",
+      img: rameshNaaGemini,
       comments: 2,
       likes: 5,
     },
     {
-      name: "Emily Rodriguez",
-      desc: "Emily Rodriguez is a Governance and Security Manager with over a decade of experience in the field and drivings.",
-      img: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
+      name: "Billy Kali",
+      desc: "Dimension Guardian — Standing at the edge of the unknown, protecting all realms with unbreakable courage and unwavering strength.",
+      img: kaliNaaGemini,
       comments: 12,
       likes: 10,
     },
     {
-      name: "Kayla Anderson",
-      desc: "Kayla Anderson is a Contract Management Team Lead, ensuring compliance and strong vendor relationships.",
-      img: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+      name: "Aari Mike",
+      desc: "Portal Explorer Agent - Mapping unseen paths between worlds, driven by curiosity, courage, and the hunger to discover what lies beyond.",
+      img: meGemini,
       comments: 6,
       likes: 4,
+    },
+  ];
+  const normalWorldmembers = [
+    {
+      name: "Dustin Ramesh",
+      desc: "Chief Strategy Officer - Guiding us through every challenge with clarity and standing as the calm force behind every critical decision we make.",
+      img: rameshNaaGemini,
+      comments: 6,
+      likes: 4,
+    },
+    {
+      name: "Billy Kali",
+      desc: "Technology Head - Building the tools that make everything possible,working silently behind the scenes to keep every system alive.",
+      img: kaliNaaGemini,
+      comments: 2,
+      likes: 5,
+    },
+    {
+      name: "Aravindh Mike",
+      desc: "Operations Lead - Keeping the gears turning smoothly, day by day,solving problems before they even surface with quiet efficiency.",
+      img: meGemini,
+      comments: 12,
+      likes: 10,
     },
   ];
   return (
@@ -52,7 +78,7 @@ const PartyMembers = ({ strangerToggle }: any) => {
       </h2>
 
       <div className={styles.MemberFlex}>
-        {members.map((m, i) => (
+        {(strangerToggle ? normalWorldmembers : members).map((m, i) => (
           <div
             className={`${styles.Card} ${
               strangerToggle ? "cardNormalWorld" : "card"
