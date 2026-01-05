@@ -15,7 +15,7 @@ import styles from "./Footer.module.scss";
 const Footer = ({ strangerToggle }: any) => {
   return (
     <div
-      style={strangerToggle ? { background: "#1e3284e6" } : {}}
+      style={strangerToggle ? { background: "#1e328486" } : {}}
       className={styles.section}
     >
       <div className={styles.container}>

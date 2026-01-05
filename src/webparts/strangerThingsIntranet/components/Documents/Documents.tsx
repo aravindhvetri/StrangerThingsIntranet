@@ -13,7 +13,7 @@ import styles from "./Documents.module.scss";
 import "../../../../External/style.css";
 import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const Documents = ({ strangerToggle }: any) => {
+const Documents = ({ strangerToggle, playHoverSound }: any) => {
   const { ref, visible } = useScrollReveal();
   const requestForm = require("../../../../External/profiles.png");
   const applications = require("../../../../External/survey-form.png");
@@ -91,6 +91,7 @@ const Documents = ({ strangerToggle }: any) => {
       <div className={styles.DocumentSection}>
         {(strangerToggle ? DocumentsNormalWorld : Documents).map((items, i) => (
           <div
+            onMouseEnter={() => playHoverSound()}
             style={strangerToggle ? { background: "#ffffffc9" } : {}}
             className={styles.DocumentCard}
             key={i}

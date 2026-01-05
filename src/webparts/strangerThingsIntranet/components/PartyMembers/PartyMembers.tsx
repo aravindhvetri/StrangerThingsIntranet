@@ -13,7 +13,7 @@ import styles from "./PartyMembers.module.scss";
 import "../../../../External/style.css";
 import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const PartyMembers = ({ strangerToggle }: any) => {
+const PartyMembers = ({ strangerToggle, playHoverSound }: any) => {
   const { ref, visible } = useScrollReveal();
   const rameshNaaGemini = require("../../../../External/rameshNaaGemini.png");
   const kaliNaaGemini = require("../../../../External/kaliNaaGemini.png");

@@ -14,7 +14,7 @@ import { Carousel } from "primereact/carousel";
 import "../../../../External/style.css";
 import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const AllNews = ({ strangerToggle }: any) => {
+const AllNews = ({ strangerToggle, playHoverSound }: any) => {
   const { ref, visible } = useScrollReveal();
   const anomaly = require("../../../../External/anomaly.jpg");
   const sightingReport = require("../../../../External/MonsterSightingReport.jpg");
@@ -106,6 +106,7 @@ const AllNews = ({ strangerToggle }: any) => {
   const cardTemplate = (item: any) => {
     return (
       <div
+        onMouseEnter={() => playHoverSound()}
         style={
           strangerToggle
             ? {

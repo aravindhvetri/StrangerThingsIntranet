@@ -65,6 +65,9 @@ const MainComponent = (props: any) => {
     name: props?.context._pageContext._user.displayName,
     email: props?.context._pageContext._user.email,
   };
+  const redLogo = require("../../../External/fireLogoRemovebg.png");
+  const whiteLogo = require("../../../External/whiteLogo.png");
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Preload audio once
   const clickSound = new Audio(`${absoluteURL}/SiteAssets/clickSound.mp3`);
@@ -75,6 +78,17 @@ const MainComponent = (props: any) => {
   const playSound = () => {
     clickSound.currentTime = 0;
     void clickSound.play();
+  };
+
+  // Preload Hover audio once
+  const clickHoverSound = new Audio(`${absoluteURL}/SiteAssets/hoverSound.mp3`);
+  clickHoverSound.preload = "auto";
+  clickHoverSound.load();
+
+  // Reuse for Hover instant play
+  const playHoverSound = () => {
+    clickHoverSound.currentTime = 0;
+    void clickHoverSound.play();
   };
 
   //handle form data change
@@ -147,7 +161,10 @@ const MainComponent = (props: any) => {
       case "All news":
         return (
           <div className={styles.newsContainers}>
-            <AllNews strangerToggle={strangerToggle} />
+            <AllNews
+              playHoverSound={playHoverSound}
+              strangerToggle={strangerToggle}
+            />
           </div>
         );
 
@@ -227,6 +244,12 @@ const MainComponent = (props: any) => {
     requestAnimationFrame(animateEyes);
     getStrangerThingsMasterDatas();
     getStrangerThingsMasterNormalWorldDatas();
+
+    // Set audio volume
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3;
+    }
+
     return () => {
       window.removeEventListener("mousemove", handleGlobalMouse);
       window.removeEventListener("mouseout", handleLeave);
@@ -293,7 +316,7 @@ const MainComponent = (props: any) => {
     <>
       <div className={strangerToggle ? "normal-world" : "hero-container"}>
         <Toast ref={toast} position="top-right" className="stranger-toast" />
-        <audio autoPlay loop>
+        <audio ref={audioRef} autoPlay loop>
           <source
             src={`${absoluteURL}/SiteAssets/strangerthings_remix.mp3`}
             type="audio/mpeg"
@@ -308,25 +331,53 @@ const MainComponent = (props: any) => {
             <div className={`${styles.headerContainer}`}>
               <div className={styles.logo}>
                 <img
-                  src={require("../../../External/fireLogoRemovebg.png")}
+                  src={strangerToggle ? whiteLogo : redLogo}
                   alt="no image"
                 ></img>
               </div>
               <div className={styles.navbar}>
                 <ul>
-                  <li>Home</li>
-                  <li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
+                    Home
+                  </li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
                     About <span className={styles.arrow}></span>
                   </li>
-                  <li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
                     Services <span className={styles.arrow}></span>
                   </li>
-                  <li>Contact</li>
-                  <li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
+                    Contact
+                  </li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
                     Blog <span className={styles.arrow}></span>
                   </li>
 
-                  <li>
+                  <li
+                    onMouseEnter={() => {
+                      playHoverSound();
+                    }}
+                  >
                     Company & News <span className={styles.arrow}></span>
                   </li>
                 </ul>
@@ -456,13 +507,22 @@ const MainComponent = (props: any) => {
               </div>
             </div>
           </div>
-          <QuickLinks strangerToggle={strangerToggle} />
+          <QuickLinks
+            playHoverSound={playHoverSound}
+            strangerToggle={strangerToggle}
+          />
           <div className={styles.partyMembersAndDocumentsSection}>
             <div className={styles.PartyMembersContainer}>
-              <PartyMembers strangerToggle={strangerToggle} />
+              <PartyMembers
+                playHoverSound={playHoverSound}
+                strangerToggle={strangerToggle}
+              />
             </div>
             <div className={styles.DocumentContainer}>
-              <Documents strangerToggle={strangerToggle} />
+              <Documents
+                playHoverSound={playHoverSound}
+                strangerToggle={strangerToggle}
+              />
             </div>
           </div>
           <div className={styles.calendarSection}>
