@@ -39,6 +39,7 @@
 .normal-world {
   background: linear-gradient(#0707073e, #0e0e0ebb),
     url("../../../External/labMorning.png") center/cover no-repeat;
+  animation: normalWorldRotateIn 1.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @keyframes upsideDownRotateIn {
@@ -52,9 +53,20 @@
   }
 }
 
+@keyframes normalWorldRotateIn {
+  0% {
+    transform: rotate(-180deg) scale(1.05);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
 .contentContainer {
-  background: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)),
-    url("../../../External/darkBanner.png") left/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.504), rgba(0, 0, 0, 0.471)),
+    url("../../../External/darkBanner.png") bottom/cover no-repeat;
   height: 350px;
 }
 .contentContainerNormalWorld {
@@ -91,7 +103,7 @@
   }
 }
 .headerSectionNormalWorld {
-  background-color: #1e3284e6 !important;
+  background-color: #1e328486 !important;
 }
 .strangerBtn {
   padding: 10px 30px !important;

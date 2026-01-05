@@ -15,7 +15,7 @@ import SPServices from "../../../../CommonServices/SPServices";
 import { Config } from "../../../../CommonServices/Config";
 import { useScrollReveal } from "../../../../CommonServices/CommonTemplates";
 
-const QuickLinks = ({ strangerToggle }: any) => {
+const QuickLinks = ({ strangerToggle, playHoverSound }: any) => {
   const { ref, visible } = useScrollReveal();
   const [quickLinkData, setQuickLinkData] = useState<any>([]);
   const contentType = strangerToggle ? "white" : "dark";
