@@ -51,6 +51,7 @@ const MainComponent = (props: any) => {
   const [visibles, setVisible] = useState(false);
   const [strangerToggle, setStrangerToggle] = useState<boolean>(true);
   const [threeDVisible, setThreeDVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [formData, setFormData] = useState<any>({});
   const [strangerThingsMasterData, setStrangerThingsMasterData] = useState<any>(
     []
@@ -114,6 +115,25 @@ const MainComponent = (props: any) => {
 
     void handleAdd(jsonData);
   };
+
+  //Control audio play/pause
+  const togglePlayPause = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  // const toggleMute = () => {
+  //   if (!audioRef.current) return;
+
+  //   audioRef.current.muted = !isMuted;
+  //   setIsMuted(!isMuted);
+  // };
 
   //show error toast
   const showErrorToast = () => {
@@ -554,12 +574,18 @@ const MainComponent = (props: any) => {
               ))}
             </div>
             <div className={styles.tabContent}>{renderContent()}</div>
-            {/* <div className={styles.lightsBottom}>
-              <img
-                src={require("../../../External/pulps.png")}
-                alt="Lights Bottom"
-              ></img>
-            </div> */}
+            <div className="music-controller">
+              <button
+                title="Pause & Play"
+                className="music-btn"
+                onClick={() => {
+                  playSound();
+                  togglePlayPause();
+                }}
+              >
+                <i className={`pi ${isPlaying ? "pi-volume-up" : "pi-play"}`} />
+              </button>
+            </div>
           </div>
           <div className={styles.footer}>
             <Footer strangerToggle={strangerToggle} />
